@@ -30,7 +30,7 @@ export const orderData =[
       Date: "2024-03-01",
       Time: "1:00 PM",
       Amount: 450,
-      Status: "New",
+      Status: "Confirmed",
       deliveryAddress: "789, Main Street, Bangalore",
     },
     {
@@ -41,7 +41,7 @@ export const orderData =[
       Date: "2024-03-01",
       Time: "1:15 PM",
       Amount: 320,
-      Status: "New",
+      Status: "Completed",
       deliveryAddress: "012, Main Street, Bangalore",
     },
     {
@@ -85,7 +85,7 @@ export const orderData =[
         Date: "2024-07-01",
         Time: "1:15 PM",
         Amount: 470,
-        Status: "Confirmed",
+        Status: "Cancelled",
         deliveryAddress: "012, Main Street, Bangalore",
         },
         {
@@ -107,7 +107,7 @@ export const orderData =[
         Date: "2024-07-01",
         Time: "12:45 PM",
         Amount: 430,
-        Status: "Cancelled",
+        Status: "Confirmed",
         deliveryAddress: "456, Main Street, Bangalore",
         },
         {
@@ -118,7 +118,7 @@ export const orderData =[
         Date: "2024-07-01",
         Time: "1:00 PM",
         Amount: 450,
-        Status: "Cancelled",
+        Status: "Confirmed",
         deliveryAddress: "789, Main Street, Bangalore",
         },
         {
@@ -129,7 +129,7 @@ export const orderData =[
         Date: "2024-07-01",
         Time: "1:15 PM",
         Amount: 660,
-        Status: "Cancelled",
+        Status: "Completed",
         deliveryAddress: "012, Main Street, Bangalore",
         },
         {

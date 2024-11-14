@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 function OrderNav({ setOrderStatus }) {
-  const [activeTab, setActiveTab] = useState("New");
+  const [activeTab, setActiveTab] = useState("All");
 
   const handleTabClick = (status) => {
     setActiveTab(status);
