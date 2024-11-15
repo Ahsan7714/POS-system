@@ -39,6 +39,19 @@ function AdminSidebar() {
           <p>Orders</p>
         </Link>
         <Link
+          to="/create-order"
+          className={`
+           ${
+             location.pathname === "/create-order"
+               ? "bg-gradient-to-r from-[#e63946] to-[#eec5ab] text-white"
+               : "text-[#000000a5]"
+           }
+           flex gap-2 items-center text-[20px] h-10 px-4 rounded-md
+         `}
+        >
+          <p>Create Order</p>
+        </Link>
+        <Link
           to="/menu-items"
           className={`
            ${
