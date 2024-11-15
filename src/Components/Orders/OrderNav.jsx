@@ -18,21 +18,21 @@ function OrderNav({ setOrderStatus }) {
             activeTab === "All"
               ? "bg-white border-b-4 border-red-500 text-red-500"
               : "bg-gray-50 hover:bg-gray-200 hover:text-red-500"
-          } flex gap-2 items-center text-[20px] h-12 px-6 rounded-lg shadow-sm transition-all duration-300`}
+          } flex gap-2 items-center text-[18px] h-12 px-6 rounded-lg shadow-sm transition-all duration-300`}
         >
           All Orders
         </button>
 
         {/* New Orders Link */}
         <button
-          onClick={() => handleTabClick("New")}
+          onClick={() => handleTabClick("In Progress")}
           className={`${
-            activeTab === "New"
+            activeTab === "In Progress"
               ? "bg-white border-b-4 border-red-500 text-red-500"
               : "bg-gray-50 hover:bg-gray-200 hover:text-red-500"
-          } flex gap-2 items-center text-[20px] h-12 px-6 rounded-lg shadow-sm transition-all duration-300`}
+          } flex gap-2 items-center text-[18px] h-12 px-6 rounded-lg shadow-sm transition-all duration-300`}
         >
-          New Orders
+          In Progress
         </button>
 
         {/* Approved/Confirmed Orders Link */}
@@ -42,7 +42,7 @@ function OrderNav({ setOrderStatus }) {
             activeTab === "Confirmed"
               ? "bg-white border-b-4 border-red-500 text-red-500"
               : "bg-gray-50 hover:bg-gray-200 hover:text-red-500"
-          } flex gap-2 items-center text-[20px] h-12 px-6 rounded-lg shadow-sm transition-all duration-300`}
+          } flex gap-2 items-center text-[18px] h-12 px-6 rounded-lg shadow-sm transition-all duration-300`}
         >
           Approved/Confirmed
         </button>
@@ -54,7 +54,7 @@ function OrderNav({ setOrderStatus }) {
             activeTab === "Cancelled"
               ? "bg-white border-b-4 border-red-500 text-red-500"
               : "bg-gray-50 hover:bg-gray-200 hover:text-red-500"
-          } flex gap-2 items-center text-[20px] h-12 px-6 rounded-lg shadow-sm transition-all duration-300`}
+          } flex gap-2 items-center text-[18px] h-12 px-6 rounded-lg shadow-sm transition-all duration-300`}
         >
           Cancelled
         </button>
@@ -66,7 +66,7 @@ function OrderNav({ setOrderStatus }) {
             activeTab === "Completed"
               ? "bg-white border-b-4 border-red-500 text-red-500"
               : "bg-gray-50 hover:bg-gray-200 hover:text-red-500"
-          } flex gap-2 items-center text-[20px] h-12 px-6 rounded-lg shadow-sm transition-all duration-300`}
+          } flex gap-2 items-center text-[18px] h-12 px-6 rounded-lg shadow-sm transition-all duration-300`}
         >
           Completed
         </button>
