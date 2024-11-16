@@ -127,35 +127,35 @@ function Orders() {
               <Table stickyHeader aria-label="sticky table">
                 <TableHead
                   sx={{
-                    bgcolor: "#FF1493",
+                    bgcolor: "#22c55e",
                     fontWeight: "bold",
                     fontSize: "19px",
                     color: "white",
                   }}
                 >
                   <TableRow>
-                    <TableCell className="text-white font-semibold"
-                    sx={{ bgcolor: "#FF1493" ,fontWeight: "bold",fontSize: "19px", color: "white" }}
+                    <TableCell className="text-white font-semibold bg-green-500"
+                    sx={{ bgcolor: "#22c55e" ,fontWeight: "bold",fontSize: "19px", color: "white" }}
                     >
                       S.No
                     </TableCell>
                     <TableCell className="text-white font-semibold"
-                    sx={{ bgcolor: "#FF1493" ,fontWeight: "bold",fontSize: "19px", color: "white" }}
+                    sx={{ bgcolor: "#22c55e" ,fontWeight: "bold",fontSize: "19px", color: "white" }}
                     >
                       Platform
                     </TableCell>
                     <TableCell className="text-white font-semibold"
-                    sx={{ bgcolor: "#FF1493" ,fontWeight: "bold",fontSize: "19px", color: "white" }}
+                    sx={{ bgcolor: "#22c55e" ,fontWeight: "bold",fontSize: "19px", color: "white" }}
                     >
                       Customer Details
                     </TableCell>
                     <TableCell className="text-white font-semibold"
-                    sx={{ bgcolor: "#FF1493" ,fontWeight: "bold",fontSize: "19px", color: "white" }}
+                    sx={{ bgcolor: "#22c55e" ,fontWeight: "bold",fontSize: "19px", color: "white" }}
                     >
                       Order Details
                     </TableCell>
                     <TableCell className="text-white font-semibold"
-                    sx={{ bgcolor: "#FF1493" ,fontWeight: "bold",fontSize: "19px", color: "white" }}
+                    sx={{ bgcolor: "#22c55e" ,fontWeight: "bold",fontSize: "19px", color: "white" }}
                     >
                       View
                     </TableCell>
@@ -208,7 +208,7 @@ function Orders() {
                         <TableCell align="center">
                           <button
                             onClick={() => openModal(order)}
-                            className="flex items-center bg-green-600 text-white px-3 py-1 rounded-md gap-1"
+                            className="flex items-center bg-blue-600 text-white px-3 py-1 rounded-md gap-1"
                           >
                             <FaRegEye />
                             View
