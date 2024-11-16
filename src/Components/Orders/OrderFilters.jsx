@@ -14,7 +14,7 @@ function OrderFilters({ onFilterChange }) {
   }, [selectedPlatform, startDate, endDate, orderId]); // Trigger only when any filter changes
 
   return (
-    <div className="flex items-center justify-between bg-white p-4 mt-4 mb-0 rounded shadow-md">
+    <div className="flex items-center justify-between bg-white p-4 mt-4 mb-0 rounded shadow-md mx-auto w-[93%]">
       {/* Platform Dropdown */}
       <div className="flex items-center space-x-2">
         <select

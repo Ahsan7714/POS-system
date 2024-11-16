@@ -10,7 +10,7 @@ function OrderNav({ setOrderStatus }) {
 
   return (
     <div className="flex font-outfit bg-gray-50 rounded-lg">
-      <div className="flex gap-6">
+      <div className="flex w-[93%] justify-between mx-auto mt-5">
         {/* All Orders Link */}
         <button
           onClick={() => handleTabClick("All")}
