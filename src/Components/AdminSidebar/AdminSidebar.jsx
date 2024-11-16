@@ -17,7 +17,7 @@ function AdminSidebar() {
           className={`
            ${
              location.pathname === "/"
-               ? "bg-gradient-to-r from-[#e63946] to-[#eec5ab] text-white"
+               ? "bg-green-500 text-white"
                : "text-[#000000a5]"
            }
            flex gap-2 items-center text-[20px] h-10 px-4 rounded-md
@@ -30,7 +30,7 @@ function AdminSidebar() {
           className={`
            ${
              location.pathname === "/orders"
-               ? "bg-gradient-to-r from-[#e63946] to-[#eec5ab] text-white"
+               ? "bg-green-500 text-white"
                : "text-[#000000a5]"
            }
            flex gap-2 items-center text-[20px] h-10 px-4 rounded-md
@@ -43,7 +43,7 @@ function AdminSidebar() {
           className={`
            ${
              location.pathname === "/create-order"
-               ? "bg-gradient-to-r from-[#e63946] to-[#eec5ab] text-white"
+               ? "bg-green-500 text-white"
                : "text-[#000000a5]"
            }
            flex gap-2 items-center text-[20px] h-10 px-4 rounded-md
@@ -56,7 +56,7 @@ function AdminSidebar() {
           className={`
            ${
              location.pathname === "/menu-items"
-               ? "bg-gradient-to-r from-[#2b5870] to-[#6a97af] text-white"
+               ? "bg-green-500 text-white"
                : "text-[#000000a5]"
            }
            flex gap-2 items-center text-[20px] h-10 px-4 rounded-md
@@ -69,7 +69,7 @@ function AdminSidebar() {
           className={`
            ${
              location.pathname === "/analytics"
-               ? "bg-gradient-to-r from-[#2b5870] to-[#6a97af] text-white"
+               ? "bg-green-500 text-white"
                : "text-[#000000a5]"
            }
            flex gap-2 items-center text-[20px] h-10 px-4 rounded-md
@@ -82,7 +82,7 @@ function AdminSidebar() {
           className={`
            ${
              location.pathname === "/settings"
-               ? "bg-gradient-to-r from-[#2b5870] to-[#6a97af] text-white"
+               ? "bg-green-500 text-white"
                : "text-[#000000a5]"
            }
            flex gap-2 items-center text-[20px] h-10 px-4 rounded-md
