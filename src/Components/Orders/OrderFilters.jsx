@@ -7,7 +7,7 @@ function OrderFilters({ onFilterChange }) {
   const [endDate, setEndDate] = useState("");
   const [orderId, setOrderId] = useState("");
 
-  const platforms = ["All Platform", "Zomato", "Swiggy", "UberEats", "FoodPanda", "Kitchen"];
+  const platforms = ["All Platform", "Deliveroo", "JustEat", "UberEats", "Lyft", "BiteHub"];
 
   useEffect(() => {
     onFilterChange(selectedPlatform, startDate, endDate, orderId);

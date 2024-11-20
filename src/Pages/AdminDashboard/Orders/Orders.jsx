@@ -33,11 +33,11 @@ import {
 
 function Orders() {
   const platformLogos = {
-    Zomato: "🍽️",
-    Swiggy: "🛵",
-    UberEats: "🚗",
-    FoodPanda: "🐼",
-    Kitchen: "🍳",
+    Deliveroo: '🍴',       
+    JustEat: '🍔',          
+    Lyft: '🚙',             
+    UberEats: '🍕',     
+    BiteHub: "🍳",
   };
 
   // State to store the active filters
@@ -114,7 +114,7 @@ function Orders() {
   };
 
   return (
-    <div className="flex font-outfit">
+    <div className="flex font-outfit ">
       <AdminSidebar />
       <div className="lg:ml-[23%] lg:w-[77%] bg-gray-50 p-4">
         <OrderNav setOrderStatus={filterOrders} />
@@ -134,7 +134,9 @@ function Orders() {
                   }}
                 >
                   <TableRow>
-                    <TableCell className="text-white font-semibold bg-green-500"
+
+                    <TableCell className="text-white font-semibold"
+
                     sx={{ bgcolor: "#22c55e" ,fontWeight: "bold",fontSize: "19px", color: "white" }}
                     >
                       S.No
