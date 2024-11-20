@@ -194,7 +194,7 @@ function Orders() {
                         <TableCell align="center">
                           <div className="flex flex-col text-[15px] ">
                             <span className="flex items-center gap-2">
-                              <GrCurrency className="text-yellow-500" />₹
+                              <GrCurrency className="text-yellow-500" />£
                               {order.Amount}
                             </span>
                             <span className="flex items-center gap-2">
@@ -324,7 +324,7 @@ function Orders() {
                   <p key={index} className="mb-3 flex items-center">
                     <FaArrowRight className="mr-2 text-red-600 text-[18px]" />
                     <span className="text-gray-800">
-                      {item.item} <strong>{item.quantity}</strong> × ₹
+                      {item.item} <strong>{item.quantity}</strong> × £
                       {item.price}
                     </span>
                   </p>
@@ -336,7 +336,7 @@ function Orders() {
                 <FaMoneyBillAlt className="mr-4 text-yellow-500 text-[20px]" />
                 <strong className="text-gray-700">Grand Total:</strong>
                 <span className="ml-2 text-gray-900">
-                  ₹{selectedOrder.Amount}
+                  £{selectedOrder.Amount}
                 </span>
               </p>
             </div>

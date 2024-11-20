@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { AiFillCheckCircle, AiOutlineFileDone } from "react-icons/ai";
 import AdminSidebar from "../../../Components/AdminSidebar/AdminSidebar";
 import { orderItems } from "../../../data/orderItems";
+import { FaPrint, FaWhatsapp, FaEnvelope } from "react-icons/fa";
+import { Mail, Printer } from "lucide-react";
 
 function CreateOrder() {
   const [orderDetails, setOrderDetails] = useState({
@@ -91,22 +93,26 @@ function CreateOrder() {
 
   const handleSendMail = () => {
     const mailBody = encodeURIComponent(
-      `Hello ${latestOrder.customer},\n\nHere is your order receipt:\n\n${latestOrder.items
-        .map(
-          (item) => `${item.quantity}x ${item.item}`
-        )
-        .join("\n")}\n\nTotal Price: ${latestOrder.totalPrice} ₹\n\nThank you for your order!`
+      `Hello ${
+        latestOrder.customer
+      },\n\nHere is your order receipt:\n\n${latestOrder.items
+        .map((item) => `${item.quantity}x ${item.item}`)
+        .join("\n")}\n\nTotal Price: ${
+        latestOrder.totalPrice
+      } £\n\nThank you for your order!`
     );
     window.location.href = `mailto:?subject=Order Receipt&body=${mailBody}`;
   };
 
   const handleSendWhatsApp = () => {
     const whatsappMessage = encodeURIComponent(
-      `Hello ${latestOrder.customer},\n\nHere is your order receipt:\n\n${latestOrder.items
-        .map(
-          (item) => `${item.quantity}x ${item.item}`
-        )
-        .join("\n")}\n\nTotal Price: ${latestOrder.totalPrice} ₹\n\nThank you for your order!`
+      `Hello ${
+        latestOrder.customer
+      },\n\nHere is your order receipt:\n\n${latestOrder.items
+        .map((item) => `${item.quantity}x ${item.item}`)
+        .join("\n")}\n\nTotal Price: ${
+        latestOrder.totalPrice
+      } £\n\nThank you for your order!`
     );
     window.open(`https://wa.me/?text=${whatsappMessage}`);
   };
@@ -282,7 +288,7 @@ function CreateOrder() {
 
           <div className="mt-4">
             <h3 className="font-semibold">
-              Total Price: {calculateTotalPrice(orderDetails.items)} ₹
+              Total Price: {calculateTotalPrice(orderDetails.items)} £
             </h3>
           </div>
 
@@ -295,55 +301,67 @@ function CreateOrder() {
         </form>
 
         <div className="mt-6">
-            {/* Receipt Modal */}
-        {showReceipt && latestOrder && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-            <div className="bg-white p-6 rounded shadow-md w-1/3">
-              <h2 className="text-lg font-bold mb-2">Order Receipt</h2>
-              <p><strong>Customer:</strong> {latestOrder.customer}</p>
-              <p><strong>Phone:</strong> {latestOrder.phone}</p>
-              <p><strong>Order Type:</strong> {latestOrder.orderType}</p>
-              {latestOrder.orderType === "Delivery" && (
-                <p><strong>Address:</strong> {latestOrder.address}</p>
-              )}
-              <p><strong>Total Price:</strong> {latestOrder.totalPrice} ₹</p>
-              <p><strong>Items:</strong></p>
-              <ul className="list-disc pl-6">
-                {latestOrder.items.map((item, i) => (
-                  <li key={i}>
-                    {item.quantity}x {item.item}
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-4 flex justify-between">
+          {/* Receipt Modal */}
+          {showReceipt && latestOrder && (
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+              <div className="bg-white p-6 rounded shadow-md w-1/3">
+                <h2 className="text-lg font-bold mb-2">Order Receipt</h2>
+                <p>
+                  <strong>Customer:</strong> {latestOrder.customer}
+                </p>
+                <p>
+                  <strong>Phone:</strong> {latestOrder.phone}
+                </p>
+                <p>
+                  <strong>Order Type:</strong> {latestOrder.orderType}
+                </p>
+                {latestOrder.orderType === "Delivery" && (
+                  <p>
+                    <strong>Address:</strong> {latestOrder.address}
+                  </p>
+                )}
+                <p>
+                  <strong>Total Price:</strong> {latestOrder.totalPrice} £
+                </p>
+                <p>
+                  <strong>Items:</strong>
+                </p>
+                <ul className="list-disc pl-6">
+                  {latestOrder.items.map((item, i) => (
+                    <li key={i}>
+                      {item.quantity}x {item.item}
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-4 flex justify-between">
+                  <button
+                    onClick={handlePrint}
+                    className="bg-blue-500 text-white p-2 rounded"
+                  >
+                    <Printer className="w-6 h-6" />
+                  </button>
+                  <button
+                    onClick={handleSendMail}
+                    className="bg-yellow-500 text-white p-2 rounded"
+                  >
+                    <Mail className="w-6 h-6" />
+                  </button>
+                  <button
+                    onClick={handleSendWhatsApp}
+                    className="bg-green-500 text-white p-2 rounded"
+                  >
+                    <FaWhatsapp className="w-6 h-6" />
+                  </button>
+                </div>
                 <button
-                  onClick={handlePrint}
-                  className="bg-blue-500 text-white p-2 rounded"
+                  onClick={() => setShowReceipt(false)}
+                  className="mt-4 bg-red-500 text-white p-2 rounded w-full"
                 >
-                  Print
-                </button>
-                <button
-                  onClick={handleSendMail}
-                  className="bg-yellow-500 text-white p-2 rounded"
-                >
-                  Send on Mail
-                </button>
-                <button
-                  onClick={handleSendWhatsApp}
-                  className="bg-green-500 text-white p-2 rounded"
-                >
-                  Send on WhatsApp
+                  Close
                 </button>
               </div>
-              <button
-                onClick={() => setShowReceipt(false)}
-                className="mt-4 bg-red-500 text-white p-2 rounded w-full"
-              >
-                Close
-              </button>
             </div>
-          </div>
-        )}
+          )}
           <h3 className="text-2xl font-semibold mb-4">Created Orders</h3>
 
           {/* Check if there are any orders */}
@@ -375,7 +393,7 @@ function CreateOrder() {
                     <strong>Payment Method:</strong> {order.paymentMethod}
                   </p>
                   <p>
-                    <strong>Total Price:</strong> {order.totalPrice} ₹
+                    <strong>Total Price:</strong> {order.totalPrice} £
                   </p>
                   <p>
                     <strong>Items:</strong>
