@@ -7,7 +7,7 @@ function OrderFilters({ onFilterChange }) {
   const [endDate, setEndDate] = useState("");
   const [orderId, setOrderId] = useState("");
 
-  const platforms = ["All Platform", "Zomato", "Swiggy", "UberEats", "FoodPanda", "Kitchen"];
+  const platforms = ["All Platform", "Deliveroo", "JustEat", "UberEats", "Lyft", "BiteHub"];
 
   useEffect(() => {
     onFilterChange(selectedPlatform, startDate, endDate, orderId);
@@ -54,7 +54,7 @@ function OrderFilters({ onFilterChange }) {
         <input
           type="text"
           placeholder="Enter Order ID"
-          className="p-1 border-b-2 border-gray-300 rounded w-25"
+          className="p-1 border-b-2 border-gray-300 rounded w-25 outline-none"
           value={orderId}
           onChange={(e) => setOrderId(e.target.value)}
         />

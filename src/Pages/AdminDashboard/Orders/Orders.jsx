@@ -33,11 +33,11 @@ import {
 
 function Orders() {
   const platformLogos = {
-    Zomato: "🍽️",
-    Swiggy: "🛵",
-    UberEats: "🚗",
-    FoodPanda: "🐼",
-    Kitchen: "🍳",
+    Deliveroo: '🍴',       
+    JustEat: '🍔',          
+    Lyft: '🚙',             
+    UberEats: '🍕',     
+    BiteHub: "🍳",
   };
 
   // State to store the active filters
@@ -127,14 +127,16 @@ function Orders() {
               <Table stickyHeader aria-label="sticky table">
                 <TableHead
                   sx={{
-                    bgcolor: "#FF1493",
+                    bgcolor: "#22c55e",
                     fontWeight: "bold",
                     fontSize: "19px",
                     color: "white",
                   }}
                 >
                   <TableRow>
+
                     <TableCell className="text-white font-semibold"
+
                     sx={{ bgcolor: "#22c55e" ,fontWeight: "bold",fontSize: "19px", color: "white" }}
                     >
                       S.No

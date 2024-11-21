@@ -2,10 +2,10 @@ import React from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts';
 
 const data = [
-  { name: 'Swiggy', value: 400, color: '#00A685' },
-  { name: 'Zomato', value: 300, color: '#E23744' },
+  { name: 'Deliveroo', value: 400, color: '#0ed3c2' },
+  { name: 'JustEat', value: 300, color: '#fa9038' },
   { name: 'UberEats', value: 300, color: '#000000' },
-  { name: 'FoodPanda', value: 200, color: '#D70F64' },
+  { name: 'Lyft', value: 200, color: '#d322a6' },
 ];
 
 export const PlatformOrders = () => {

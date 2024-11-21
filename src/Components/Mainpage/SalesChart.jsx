@@ -12,10 +12,10 @@ export const SalesChart = ({ startDate, endDate }) => {
   // Generate sample data for each date
   const data = dates.map(date => ({
     date: format(date, 'yyyy-MM-dd'),
-    Swiggy: Math.floor(Math.random() * 3000) + 1000,
-    Zomato: Math.floor(Math.random() * 3000) + 1000,
+    Deliveroo: Math.floor(Math.random() * 3000) + 1000,
+    JustEat: Math.floor(Math.random() * 3000) + 1000,
     UberEats: Math.floor(Math.random() * 3000) + 1000,
-    FoodPanda: Math.floor(Math.random() * 3000) + 1000,
+    Lyft: Math.floor(Math.random() * 3000) + 1000,
   }));
 
   return (
@@ -28,10 +28,10 @@ export const SalesChart = ({ startDate, endDate }) => {
             <XAxis dataKey="date" />
             <YAxis />
             <Tooltip />
-            <Area type="monotone" dataKey="Swiggy" stackId="1" stroke="#00A685" fill="#00A685" />
-            <Area type="monotone" dataKey="Zomato" stackId="1" stroke="#E23744" fill="#E23744" />
+            <Area type="monotone" dataKey="Deliveroo" stackId="1" stroke="#00A685" fill="#00A685" />
+            <Area type="monotone" dataKey="JustEat" stackId="1" stroke="#E23744" fill="#E23744" />
             <Area type="monotone" dataKey="UberEats" stackId="1" stroke="#000000" fill="#000000" />
-            <Area type="monotone" dataKey="FoodPanda" stackId="1" stroke="#D70F64" fill="#D70F64" />
+            <Area type="monotone" dataKey="Lyft" stackId="1" stroke="#D70F64" fill="#D70F64" />
           </AreaChart>
         </ResponsiveContainer>
       </div>

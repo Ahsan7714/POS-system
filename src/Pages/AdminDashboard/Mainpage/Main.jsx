@@ -12,17 +12,17 @@ import AdminSidebar from "../../../Components/AdminSidebar/AdminSidebar"
 const dummyPlatformData = [
   {
     date: '2024-03-01',
-    Zomato: { totalOrders: 40, revenue: 7000, avgDeliveryTime: '30 min', activeOrders: 5 },
-    Swiggy: { totalOrders: 32, revenue: 5000, avgDeliveryTime: '25 min', activeOrders: 3 },
+    Deliveroo: { totalOrders: 40, revenue: 7000, avgDeliveryTime: '30 min', activeOrders: 5 },
+    JustEat: { totalOrders: 32, revenue: 5000, avgDeliveryTime: '25 min', activeOrders: 3 },
     UberEats: { totalOrders: 28, revenue: 4500, avgDeliveryTime: '35 min', activeOrders: 2 },
-    FoodPanda: { totalOrders: 18, revenue: 3200, avgDeliveryTime: '40 min', activeOrders: 1 },
+    Lyft: { totalOrders: 18, revenue: 3200, avgDeliveryTime: '40 min', activeOrders: 1 },
   },
   {
     date: '2024-06-02',
-    Zomato: { totalOrders: 50, revenue: 8000, avgDeliveryTime: '32 min', activeOrders: 6 },
-    Swiggy: { totalOrders: 40, revenue: 6800, avgDeliveryTime: '28 min', activeOrders: 4 },
+    Deliveroo: { totalOrders: 50, revenue: 8000, avgDeliveryTime: '32 min', activeOrders: 6 },
+    JustEat: { totalOrders: 40, revenue: 6800, avgDeliveryTime: '28 min', activeOrders: 4 },
     UberEats: { totalOrders: 30, revenue: 4800, avgDeliveryTime: '34 min', activeOrders: 3 },
-    FoodPanda: { totalOrders: 20, revenue: 3500, avgDeliveryTime: '38 min', activeOrders: 2 },
+    Lyft: { totalOrders: 20, revenue: 3500, avgDeliveryTime: '38 min', activeOrders: 2 },
   },
   // Add more dummy data as needed for different dates
 ];

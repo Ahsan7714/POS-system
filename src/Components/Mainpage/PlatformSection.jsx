@@ -2,18 +2,20 @@ import React from 'react';
 import { ExternalLink, TrendingUp, Clock, DollarSign } from 'lucide-react';
 
 const platformColors = {
-  Zomato: 'bg-[#E23744]',
-  Swiggy: 'bg-[#00A685]',
+  Deliveroo: 'bg-[#06a88f]',  // A balanced dark teal for Deliveroo
+JustEat: 'bg-[#e8790d]',    // A rich amber for JustEat
+Lyft: 'bg-[#9b1d7d]',       // A deep magenta for Lyft
+
   UberEats: 'bg-black',
-  FoodPanda: 'bg-[#D70F64]',
 };
 
 const platformLogos = {
-  Zomato: '🍽️',
-  Swiggy: '🛵',
-  UberEats: '🚗',
-  FoodPanda: '🐼',
+  Deliveroo: '🍴',       
+  JustEat: '🍔',          
+  Lyft: '🚙',             
+  UberEats: '🍕',         
 };
+
 
 export const PlatformSection = ({ platform, stats }) => {
   return (
@@ -43,7 +45,7 @@ export const PlatformSection = ({ platform, stats }) => {
               <DollarSign className="w-4 h-4" />
               <span className="text-sm">Revenue</span>
             </div>
-            <p className="text-2xl font-bold">₹{stats.revenue.toLocaleString()}</p>
+            <p className="text-2xl font-bold">£{stats.revenue.toLocaleString()}</p>
           </div>
           
           <div className="bg-gray-50 rounded-lg p-4">
