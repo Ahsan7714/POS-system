@@ -4,11 +4,11 @@ import { TrendingUp } from 'lucide-react';
 export const TopItems = ({ startDate, endDate }) => {
   // In a real app, this data would be filtered based on the date range
   const topItems = [
-    { name: 'Butter Chicken', platform: 'Zomato', orders: 145, revenue: 21750 },
-    { name: 'Paneer Tikka', platform: 'Swiggy', orders: 132, revenue: 15840 },
-    { name: 'Chicken Biryani', platform: 'UberEats', orders: 128, revenue: 19200 },
-    { name: 'Dal Makhani', platform: 'FoodPanda', orders: 98, revenue: 9800 },
-    { name: 'Naan', platform: 'Zomato', orders: 89, revenue: 4450 },
+    { name: 'Chicken Tikka Masala', platform: 'Deliveroo', orders: 145, revenue: 21750 },
+    { name: 'Margarita Pizza', platform: 'JustEat', orders: 132, revenue: 15840 },
+    { name: 'Chicken Wings', platform: 'UberEats', orders: 128, revenue: 19200 },
+    { name: 'Beef Burger with Fries', platform: 'Lyft', orders: 98, revenue: 9800 },
+    { name: 'Vegetable Samosas ', platform: 'Deliveroo', orders: 89, revenue: 4450 },
   ];
 
   return (
@@ -38,7 +38,7 @@ export const TopItems = ({ startDate, endDate }) => {
                 <td className="py-3 px-4">{item.name}</td>
                 <td className="py-3 px-4">{item.platform}</td>
                 <td className="text-right py-3 px-4">{item.orders}</td>
-                <td className="text-right py-3 px-4">₹{item.revenue.toLocaleString()}</td>
+                <td className="text-right py-3 px-4">£{item.revenue.toLocaleString()}</td>
               </tr>
             ))}
           </tbody>

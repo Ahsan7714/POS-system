@@ -1,5 +1,5 @@
 import React from 'react';
-import { IndianRupee, ShoppingBag, AlertOctagon } from 'lucide-react';
+import { IndianRupee, ShoppingBag, AlertOctagon, PoundSterling, PoundSterlingIcon } from 'lucide-react';
 
 const StatCard = ({ title, value, icon, color }) => (
   <div className="bg-white rounded-xl shadow-lg p-6 flex items-center">
@@ -18,8 +18,8 @@ export const DashboardStats = () => {
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
       <StatCard
         title="Total Sales"
-        value="₹45,678"
-        icon={<IndianRupee className="w-6 h-6 text-green-700" />}
+        value="£45,678"
+        icon={<PoundSterling className="w-6 h-6 text-green-700" />}
         color="bg-green-100"
       />
       <StatCard
@@ -30,8 +30,8 @@ export const DashboardStats = () => {
       />
       <StatCard
         title="Average Order Value"
-        value="₹195"
-        icon={<IndianRupee className="w-6 h-6 text-purple-700" />}
+        value="£195"
+        icon={<PoundSterling className="w-6 h-6 text-purple-700" />}
         color="bg-purple-100"
       />
       <StatCard
