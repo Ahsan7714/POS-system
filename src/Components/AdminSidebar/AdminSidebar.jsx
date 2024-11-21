@@ -10,6 +10,7 @@ import {
 
 function AdminSidebar() {
   const location = useLocation();
+
   return (
     <div className="fixed left-0 top-0 bg-white h-full overflow-y-auto w-[22%] content-scrollbar font-outfit">
       <div className="flex items-center justify-center">
@@ -29,6 +30,7 @@ function AdminSidebar() {
           <FaTachometerAlt size={20} /> {/* Icon for Dashboard */}
           <p>Dashboard</p>
         </Link>
+
         <Link
           to="/orders"
           className={`${
@@ -40,6 +42,7 @@ function AdminSidebar() {
           <FaClipboardList size={20} /> {/* Icon for Orders */}
           <p>Orders</p>
         </Link>
+
         <Link
           to="/create-order"
           className={`${
@@ -51,6 +54,7 @@ function AdminSidebar() {
           <FaPlusCircle size={20} /> {/* Icon for Create Order */}
           <p>Create Order</p>
         </Link>
+
         <Link
           to="/menu-items"
           className={`${
@@ -62,6 +66,7 @@ function AdminSidebar() {
           <FaPizzaSlice size={20} /> {/* Icon for Menu Items */}
           <p>Menu Items</p>
         </Link>
+
         <Link
           to="/analytics"
           className={`${
@@ -73,6 +78,7 @@ function AdminSidebar() {
           <FaChartLine size={20} /> {/* Icon for Analytics */}
           <p>Analytics</p>
         </Link>
+
         <Link
           to="/settings"
           className={`${
