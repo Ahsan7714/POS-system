@@ -1,8 +1,17 @@
-// import React from 'react'
 import { Link, useLocation } from "react-router-dom";
+import {
+  FaTachometerAlt,
+  FaClipboardList,
+  FaPlusCircle,
+  FaPizzaSlice,
+  FaChartLine,
+  FaCog,
+} from "react-icons/fa"; // Import icons
+import { FaKitchenSet } from "react-icons/fa6";
 
 function AdminSidebar() {
   const location = useLocation();
+
   return (
     <div className="fixed left-0 top-0 bg-white h-full overflow-y-auto w-[22%] content-scrollbar font-outfit">
       <div className="flex items-center justify-center">
@@ -19,8 +28,10 @@ function AdminSidebar() {
               : "text-[#000000a5]"
           } flex gap-2 items-center text-[20px] h-10 px-4 rounded-md`}
         >
+          <FaTachometerAlt size={20} /> {/* Icon for Dashboard */}
           <p>Dashboard</p>
         </Link>
+
         <Link
           to="/orders"
           className={`${
@@ -29,8 +40,10 @@ function AdminSidebar() {
               : "text-[#000000a5]"
           } flex gap-2 items-center text-[20px] h-10 px-4 rounded-md`}
         >
+          <FaClipboardList size={20} /> {/* Icon for Orders */}
           <p>Orders</p>
         </Link>
+
         <Link
           to="/create-order"
           className={`${
@@ -39,8 +52,10 @@ function AdminSidebar() {
               : "text-[#000000a5]"
           } flex gap-2 items-center text-[20px] h-10 px-4 rounded-md`}
         >
+          <FaPlusCircle size={20} /> {/* Icon for Create Order */}
           <p>Create Order</p>
         </Link>
+
         <Link
           to="/menu-items"
           className={`${
@@ -49,8 +64,10 @@ function AdminSidebar() {
               : "text-[#000000a5]"
           } flex gap-2 items-center text-[20px] h-10 px-4 rounded-md`}
         >
+          <FaPizzaSlice size={20} /> {/* Icon for Menu Items */}
           <p>Menu Items</p>
         </Link>
+
         <Link
           to="/analytics"
           className={`${
@@ -59,8 +76,22 @@ function AdminSidebar() {
               : "text-[#000000a5]"
           } flex gap-2 items-center text-[20px] h-10 px-4 rounded-md`}
         >
+          <FaChartLine size={20} /> {/* Icon for Analytics */}
           <p>Analytics</p>
         </Link>
+
+        <Link
+          to="/kitchen"
+          className={`${
+            location.pathname === "/kitchen"
+              ? "bg-green-500 text-white"
+              : "text-[#000000a5]"
+          } flex gap-2 items-center text-[20px] h-10 px-4 rounded-md`}
+        >
+          <FaKitchenSet size={20} />
+          <p>Kitchen</p>
+        </Link>
+
         <Link
           to="/settings"
           className={`${
@@ -69,6 +100,7 @@ function AdminSidebar() {
               : "text-[#000000a5]"
           } flex gap-2 items-center text-[20px] h-10 px-4 rounded-md`}
         >
+          <FaCog size={20} /> {/* Icon for Settings */}
           <p>Settings</p>
         </Link>
       </div>
