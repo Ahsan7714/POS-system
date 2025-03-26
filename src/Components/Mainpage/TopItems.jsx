@@ -7,7 +7,7 @@ export const TopItems = ({ startDate, endDate }) => {
     { name: 'Chicken Tikka Masala', platform: 'Deliveroo', orders: 145, revenue: 21750 },
     { name: 'Margarita Pizza', platform: 'JustEat', orders: 132, revenue: 15840 },
     { name: 'Chicken Wings', platform: 'UberEats', orders: 128, revenue: 19200 },
-    { name: 'Beef Burger with Fries', platform: 'Lyft', orders: 98, revenue: 9800 },
+    // { name: 'Beef Burger with Fries', platform: 'Lyft', orders: 98, revenue: 9800 },
     { name: 'Vegetable Samosas ', platform: 'Deliveroo', orders: 89, revenue: 4450 },
   ];
 

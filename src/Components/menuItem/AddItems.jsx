@@ -135,16 +135,7 @@ const AddItems = ({ isOpen, onClose }) => {
               <span className=" font-semibold">🍕 UberEats</span>
             </div>
           </div>
-          <div className=" mt-4 flex justify-between">
-            <div className=" flex gap-2 items-center ">
-              <input type="checkbox" className=" w-4 h-4" />
-              <span className=" font-semibold">🚙 Lyft</span>
-            </div>
-            <div className=" flex gap-2 items-center ">
-              <input type="checkbox" className=" w-4 h-4" />
-              <span className=" font-semibold">🍳 BiteHub</span>
-            </div>
-          </div>
+         
 
           <button
             type="submit"

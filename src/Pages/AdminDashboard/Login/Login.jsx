@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { GrRestaurant } from "react-icons/gr";
-import { IoRestaurantOutline, IoRestaurantSharp } from "react-icons/io5";
+
+import { IoRestaurantOutline } from "react-icons/io5";
 import { MdEmail } from "react-icons/md";
 import { Link } from "react-router-dom";
 
@@ -22,7 +22,7 @@ const Login = () => {
             <IoRestaurantOutline size={60} />
           </div>
           <h1 className=" text-green-500 font-bold text-2xl">
-            Welcome to Restaurant POS
+            Welcome to Restaurant ISRIS
           </h1>
           <h2 className="mb-4 text-black font-normal text-center">
             Sign in to your account
@@ -78,7 +78,7 @@ const Login = () => {
             </div>
             <div className={`flex items-center w-full`}>
               <h4>Don't have an account?</h4>
-              <Link to="/signup" className="text-green-500 pl-2 font-medium">
+              <Link to="/" className="text-green-500 pl-2 font-medium">
                 Sign Up
               </Link>
             </div>

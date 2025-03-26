@@ -52,7 +52,7 @@ function Analytics() {
     { name: "Chicken Tikka Masala", platform: "Deliveroo", orders: 145, revenue: 217 },
     { name: "Margarita Pizza", platform: "JustEat", orders: 132, revenue: 15840 },
     { name: "Chicken Wings", platform: "UberEats", orders: 128, revenue: 19200 },
-    { name: "Beef Burger with Fries", platform: "Lyft", orders: 98, revenue: 9800 },
+    // { name: "Beef Burger with Fries", platform: "Lyft", orders: 98, revenue: 9800 },
     { name: "Vegetable Samosas", platform: "Deliveroo", orders: 89, revenue: 4450 },
   ];
 
@@ -72,7 +72,7 @@ function Analytics() {
     Deliveroo: Math.floor(Math.random() * 3000) + 1000,
     JustEat: Math.floor(Math.random() * 3000) + 1000,
     UberEats: Math.floor(Math.random() * 3000) + 1000,
-    Lyft: Math.floor(Math.random() * 3000) + 1000,
+    // Lyft: Math.floor(Math.random() * 3000) + 1000,
   }));
 
   return (
@@ -175,13 +175,13 @@ function Analytics() {
                   stroke="#000000"
                   fill="#000000"
                 />
-                <Area
+                {/* <Area
                   type="monotone"
                   dataKey="Lyft"
                   stackId="1"
                   stroke="#D70F64"
                   fill="#D70F64"
-                />
+                /> */}
               </AreaChart>
             </ResponsiveContainer>
           </div>

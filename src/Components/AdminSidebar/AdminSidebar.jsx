@@ -16,14 +16,14 @@ function AdminSidebar() {
     <div className="fixed left-0 top-0 bg-white h-full overflow-y-auto w-[22%] content-scrollbar font-outfit">
       <div className="flex items-center justify-center">
         <h1 className="text-3xl font-bold text-gray-800 p-6 mt-3">
-          Restaurant POS
+          Restaurant ISRIS
         </h1>
       </div>
       <div className="flex flex-col px-12 py-10 gap-10">
         <Link
-          to="/"
+          to="/dashboard"
           className={`${
-            location.pathname === "/"
+            location.pathname === "/dashboard"
               ? "bg-green-500 text-white"
               : "text-[#000000a5]"
           } flex gap-2 items-center text-[20px] h-10 px-4 rounded-md`}
@@ -93,15 +93,15 @@ function AdminSidebar() {
         </Link>
 
         <Link
-          to="/settings"
+          to="/profile"
           className={`${
-            location.pathname === "/settings"
+            location.pathname === "/profile"
               ? "bg-green-500 text-white"
               : "text-[#000000a5]"
           } flex gap-2 items-center text-[20px] h-10 px-4 rounded-md`}
         >
           <FaCog size={20} /> {/* Icon for Settings */}
-          <p>Settings</p>
+          <p>Profile</p>
         </Link>
       </div>
     </div>

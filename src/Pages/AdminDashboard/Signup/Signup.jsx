@@ -24,7 +24,7 @@ const Signup = () => {
             <IoRestaurantOutline size={60} />
           </div>
           <h1 className=" text-green-500 font-bold text-2xl">
-            Welcome to Restaurant POS
+            Welcome to Restaurant ISRIS
           </h1>
           <h2 className="mb-4 text-black font-normal text-center">
             Create an account

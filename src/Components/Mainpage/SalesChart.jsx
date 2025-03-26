@@ -15,7 +15,7 @@ export const SalesChart = ({ startDate, endDate }) => {
     Deliveroo: Math.floor(Math.random() * 3000) + 1000,
     JustEat: Math.floor(Math.random() * 3000) + 1000,
     UberEats: Math.floor(Math.random() * 3000) + 1000,
-    Lyft: Math.floor(Math.random() * 3000) + 1000,
+    // Lyft: Math.floor(Math.random() * 3000) + 1000,
   }));
 
   return (
@@ -31,7 +31,7 @@ export const SalesChart = ({ startDate, endDate }) => {
             <Area type="monotone" dataKey="Deliveroo" stackId="1" stroke="#00A685" fill="#00A685" />
             <Area type="monotone" dataKey="JustEat" stackId="1" stroke="#E23744" fill="#E23744" />
             <Area type="monotone" dataKey="UberEats" stackId="1" stroke="#000000" fill="#000000" />
-            <Area type="monotone" dataKey="Lyft" stackId="1" stroke="#D70F64" fill="#D70F64" />
+            {/* <Area type="monotone" dataKey="Lyft" stackId="1" stroke="#D70F64" fill="#D70F64" /> */}
           </AreaChart>
         </ResponsiveContainer>
       </div>

@@ -10,10 +10,10 @@ Lyft: 'bg-[#9b1d7d]',       // A deep magenta for Lyft
 };
 
 const platformLogos = {
-  Deliveroo: '🍴',       
-  JustEat: '🍔',          
-  Lyft: '🚙',             
-  UberEats: '🍕',         
+  Deliveroo:"",       
+  JustEat:"",          
+  Lyft:"",             
+  UberEats: '',         
 };
 
 

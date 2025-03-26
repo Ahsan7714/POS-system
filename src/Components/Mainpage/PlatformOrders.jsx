@@ -5,7 +5,7 @@ const data = [
   { name: 'Deliveroo', value: 400, color: '#0ed3c2' },
   { name: 'JustEat', value: 300, color: '#fa9038' },
   { name: 'UberEats', value: 300, color: '#000000' },
-  { name: 'Lyft', value: 200, color: '#d322a6' },
+  // { name: 'Lyft', value: 200, color: '#d322a6' },
 ];
 
 export const PlatformOrders = () => {

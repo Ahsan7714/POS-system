@@ -36,15 +36,15 @@ const dummyStats = [
     avgOrderValue: 160,
     cancelledOrders: 4,
   },
-  {
-    platform: "Lyft",
-    startDate: "2024-07-01",
-    endDate: "2024-07-30",
-    totalSales: 8000,
-    totalOrders: 40,
-    avgOrderValue: 174,
-    cancelledOrders: 2,
-  },
+  // {
+  //   platform: "Lyft",
+  //   startDate: "2024-07-01",
+  //   endDate: "2024-07-30",
+  //   totalSales: 8000,
+  //   totalOrders: 40,
+  //   avgOrderValue: 174,
+  //   cancelledOrders: 2,
+  // },
 ];
 
 export default dummyStats;
