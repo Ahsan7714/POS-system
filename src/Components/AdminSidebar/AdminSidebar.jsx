@@ -8,6 +8,7 @@ import {
   FaCog,
 } from "react-icons/fa"; // Import icons
 import { FaKitchenSet } from "react-icons/fa6";
+import { IoShareSocialOutline } from "react-icons/io5";
 
 function AdminSidebar() {
   const location = useLocation();
@@ -102,6 +103,17 @@ function AdminSidebar() {
         >
           <FaCog size={20} /> {/* Icon for Settings */}
           <p>Profile</p>
+        </Link>
+        <Link
+          to="/social"
+          className={`${
+            location.pathname === "/social"
+              ? "bg-green-500 text-white"
+              : "text-[#000000a5]"
+          } flex gap-2 items-center text-[20px] h-10 px-4 rounded-md`}
+        >
+          <IoShareSocialOutline size={20} /> {/* Icon for Settings */}
+          <p>Social App</p>
         </Link>
       </div>
     </div>

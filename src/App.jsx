@@ -10,6 +10,8 @@ import Signup from './Pages/AdminDashboard/Signup/Signup';
 import Login from './Pages/AdminDashboard/Login/Login';
 import AdminPanel from './Pages/AdminDashboard/Admin Panel/AdminPanel';
 import Profile from './Pages/AdminDashboard/profile/Profile';
+import SocialMedia from './Pages/AdminDashboard/social/SocialMedia';
+
 
 
 function App() {
@@ -25,6 +27,7 @@ function App() {
     <Route path="/menu-items" element={<MenuItems />} />
     <Route path='/kitchen' element={<Kitchen />} />
     <Route path='/profile' element={<Profile/>} />
+    <Route path='/social' element={<SocialMedia/>}/>
     <Route path ='/' element={<Signup/>}/>
     <Route path='/login' element={<Login/>}/>
     <Route path='/admin-user' element={<AdminPanel/>}/>
