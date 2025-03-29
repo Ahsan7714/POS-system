@@ -35,9 +35,9 @@ function Orders() {
   const platformLogos = {
     Deliveroo: '🍴',       
     JustEat: '🍔',          
-    Lyft: '🚙',             
+    // Lyft: '🚙',             
     UberEats: '🍕',     
-    BiteHub: "🍳",
+    // BiteHub: "🍳",
   };
 
   // State to store the active filters

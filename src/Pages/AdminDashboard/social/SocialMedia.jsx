@@ -2,16 +2,22 @@ import React, { useState } from "react";
 import AdminSidebar from "../../../Components/AdminSidebar/AdminSidebar";
 import { IoRestaurantOutline } from "react-icons/io5";
 import { RxUpload } from "react-icons/rx";
+import { FaFacebook, FaInstagram, FaTiktok } from "react-icons/fa";
 
 const SocialMedia = () => {
   const [connectedAccounts, setConnectedAccounts] = useState({
     instagram: false,
     facebook: false,
-    twitter: false,
+    tiktok: false,
   });
   const [popup, setPopup] = useState(null);
   const [text, setText] = useState("");
   const [image, setImage] = useState(null);
+  const [selectedPlatforms, setSelectedPlatforms] = useState({
+    instagram: false,
+    facebook: false,
+    tiktok: false,
+  });
   const handleLogin = (platform) => {
     setConnectedAccounts((prev) => ({ ...prev, [platform]: true }));
     setPopup(null);
@@ -31,41 +37,33 @@ const SocialMedia = () => {
 
     file.readAsDataURL(e.target.files[0]);
   };
+  const handlePlatformSelection = (platform) => {
+    setSelectedPlatforms((prev) => ({
+      ...prev,
+      [platform]: !prev[platform],
+    }));
+  };
+
+  const handlePost = () => {
+    const isAnyPlatformSelected = Object.values(selectedPlatforms).includes(true);
+    
+    if (!isAnyPlatformSelected) {
+      alert("Kindly select at least one platform to post.");
+      return;
+    }
+    
+    console.log("Post submitted:", text, image, selectedPlatforms);
+    setText("");
+    setImage(null);
+    setSelectedPlatforms({ instagram: false, facebook: false, tiktok: false });
+  };
+
 
   return (
     <div className="flex font-outfit bg-gray-100 min-h-screen">
       <AdminSidebar />
-      <div className="lg:ml-[23%] lg:w-[77%] pr-10 flex flex-col items-center  mt-10">
-        <div className="flex flex-col items-center">
-          <h1 className="text-2xl font-bold mb-6">
-            Connect Your Social Accounts
-          </h1>
-          <div className="flex gap-4">
-            {["instagram", "facebook", "twitter"].map((platform) => (
-              <button
-                key={platform}
-                className={`px-6 py-2 text-white rounded-lg transition duration-300 ${
-                  connectedAccounts[platform]
-                    ? "bg-gray-400 cursor-not-allowed"
-                    : platform === "instagram"
-                    ? "bg-pink-500 hover:bg-pink-600"
-                    : platform === "facebook"
-                    ? "bg-blue-600 hover:bg-blue-700"
-                    : "bg-blue-400 hover:bg-blue-500"
-                }`}
-                onClick={() =>
-                  !connectedAccounts[platform] && setPopup(platform)
-                }
-                disabled={connectedAccounts[platform]}
-              >
-                {platform.charAt(0).toUpperCase() + platform.slice(1)}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {Object.values(connectedAccounts).includes(true) && (
-          <div className="mt-8 mb-8 w-full max-w-xl bg-white p-6 rounded-lg shadow-lg">
+      <div className="lg:ml-[23%] lg:w-[77%] pr-10 flex flex-col items-center mt-4 ">
+      <div className="mt-8 mb-8 w-full max-w-xl bg-white p-6 rounded-lg shadow-lg ">
             <h2 className="text-lg font-semibold mb-2">Create a Post</h2>
             <textarea
               value={text}
@@ -90,7 +88,7 @@ const SocialMedia = () => {
                 />
               ) : (
                 <>
-                  <RxUpload size={40} className="text-green-500 mb-3" />
+                  <RxUpload size={25} className="text-green-500 mb-3" />
                   <p className="text-gray-600 font-semibold text-center">
                     <span className="block text-lg text-green-600">
                       Click to Upload
@@ -112,25 +110,64 @@ const SocialMedia = () => {
             </div>
             <div className="mt-4">
               <h3 className="text-md font-medium">Select Platforms</h3>
-              {["instagram", "facebook", "twitter"].map(
+              {["instagram", "facebook", "tiktok"].map(
                 (platform) =>
                   connectedAccounts[platform] && (
                     <label
                       key={platform}
                       className="flex items-center gap-2 mt-2"
                     >
-                      <input type="checkbox" />
+                      <input type="checkbox"
+                        checked={selectedPlatforms[platform]}
+                        onChange={() => handlePlatformSelection(platform)}
+                      />
                       {platform.charAt(0).toUpperCase() + platform.slice(1)}
                     </label>
                   )
               )}
             </div>
 
-            <button className="mt-4 w-full py-2 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-700 transition duration-300">
+            <button
+            onClick={handlePost}
+             className="mt-4 w-full py-2 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-700 transition duration-300">
               Post Now
             </button>
+
+            <div className="flex flex-col items-center">
+          <h1 className="text-xl font-bold mb-6 mt-6">
+            Connect With 
+          </h1>
+          <div className="flex gap-4">
+            {["instagram", "facebook", "tiktok"].map((platform) => (
+              <button
+                key={platform}
+                className={`px-6 py-2 text-white rounded-lg transition duration-300 ${
+                  connectedAccounts[platform]
+                    ? "bg-gray-400 cursor-not-allowed"
+                    : platform === "instagram"
+                    ? "bg-pink-500 hover:bg-pink-600"
+                    : platform === "facebook"
+                    ? "bg-blue-600 hover:bg-blue-700"
+                    : "bg-black hover:bg-black/80"
+                }`}
+                onClick={() =>
+                  !connectedAccounts[platform] && setPopup(platform)
+                }
+                disabled={connectedAccounts[platform]}
+              >
+                <div className="flex justify-center items-center gap-2">
+                {platform === "instagram" && <FaInstagram className="text-white" />}
+                {platform === "facebook" && <FaFacebook className="text-white" />}
+                {platform === "tiktok" && <FaTiktok className="text-white" />}
+                {platform.charAt(0).toUpperCase() + platform.slice(1)}
+                </div>
+              </button>
+            ))}
           </div>
-        )}
+        </div>
+
+
+          </div>
       </div>
 
       {popup && (
