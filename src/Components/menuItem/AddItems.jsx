@@ -1,7 +1,9 @@
+import axios from "axios";
 import React, { useState } from "react";
-import { RxAvatar, RxUpload } from "react-icons/rx";
-import { FiCamera } from "react-icons/fi"; // Camera icon for upload
-import { AiOutlineCamera } from "react-icons/ai";
+import {  RxUpload } from "react-icons/rx";
+import { server } from "../../server";
+import toast from "react-hot-toast";
+
 
 const AddItems = ({ isOpen, onClose }) => {
   const [itemName, setItemName] = useState("");
@@ -9,24 +11,42 @@ const AddItems = ({ isOpen, onClose }) => {
   const [itemPrice, setItemPrice] = useState("");
   const [image, setImage] = useState(null);
 
+
   if (!isOpen) return null;
 
-  const handleImage = (e) => {
-    e.preventDefault();
-    const file = new FileReader();
-
-    file.onload = () => {
-      setImage(file.result);
-    };
-
-    file.readAsDataURL(e.target.files[0]);
+  const handleImage = async (e) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", "Restaurant-isris"); // replace this with your preset
+  
+    try {
+      const res = await fetch("https://api.cloudinary.com/v1_1/dt6skdss9/image/upload", {
+        method: "POST",
+        body: formData,
+      });
+  
+      const data = await res.json();
+      setImage(data.secure_url); // set image URL to state
+    } catch (error) {
+      console.error("Cloudinary upload failed", error);
+    }
   };
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // You can handle the form submission here
-    console.log("Item Added:", itemName, itemCategory, itemPrice, image);
-    onClose(); // Close the modal after submitting the item
+    axios.post(`${server}/menu/createItem`,{name:itemName,category:itemCategory,price:itemPrice,image:image},{withCredentials:true}).then((res)=>{
+      toast.success(res.data.message);
+      setItemName("");
+      setItemCategory("");
+      setItemPrice("");
+      setImage(null);
+      onClose();
+      window.location.reload();
+    }).catch((error)=>{
+      toast.error(error.response.data.message);
+    })
   };
 
   const triggerImageUpload = () => {
@@ -90,7 +110,7 @@ const AddItems = ({ isOpen, onClose }) => {
               type="text"
               value={itemName}
               onChange={(e) => setItemName(e.target.value)}
-              className="w-full p-2 border border-gray-300 rounded-md mt-2"
+              className="w-full p-2 border border-gray-300 rounded-md mt-2 outline-none focus:border-green-500"
               placeholder="Enter item name"
             />
           </div>
@@ -103,7 +123,7 @@ const AddItems = ({ isOpen, onClose }) => {
               type="text"
               value={itemCategory}
               onChange={(e) => setItemCategory(e.target.value)}
-              className="w-full p-2 border border-gray-300 rounded-md mt-2"
+              className="w-full p-2 border border-gray-300 rounded-md mt-2 outline-none focus:border-green-500"
               placeholder="Enter item category"
             />
           </div>
@@ -116,7 +136,7 @@ const AddItems = ({ isOpen, onClose }) => {
               type="number"
               value={itemPrice}
               onChange={(e) => setItemPrice(e.target.value)}
-              className="w-full p-2 border border-gray-300 rounded-md mt-2"
+              className="w-full p-2 border border-gray-300 rounded-md mt-2 outline-none focus:border-green-500"
               placeholder="Enter item price"
             />
           </div>

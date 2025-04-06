@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AdminSidebar from "../../../Components/AdminSidebar/AdminSidebar";
 import { IoRestaurantOutline } from "react-icons/io5";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
@@ -6,12 +6,17 @@ import { motion } from "framer-motion";
 import { RiKeyFill } from "react-icons/ri";
 import { GiToken } from "react-icons/gi";
 import SocialButton from "../../../Components/Social/SocialButton";
+import { useSelector } from "react-redux";
+import axios from "axios";
+import { server } from "../../../server";
+import toast from "react-hot-toast";
 
 const Profile = () => {
+  const {user} = useSelector((state) => state.user);
   const [visible, setVisible] = useState(false);
-  const [ownerName, setOwnerName] = useState("John Doe");
-  const [email, setEmail] = useState("johndoe@example.com");
-  const [restaurantName, setRestaurantName] = useState("John's Cafe");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [restaurantName, setRestaurantName] = useState("");
   const [popup, setPopup] = useState(null);
   const [connectedServices, setConnectedServices] = useState({
     deliveroo: false,
@@ -21,8 +26,28 @@ const Profile = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("User profile updated:", { ownerName, email, restaurantName });
+    axios.put(
+      `${server}/user/updateUser`,
+      { name, email, restaurantName },
+      { withCredentials: true }
+    )
+      .then((res) => {
+        toast.success(res.data.message);
+     
+      })
+      .catch((error) => {
+        toast.error(error.response.data.message);
+      });
   };
+
+  useEffect(() => {
+    if (user) {
+      setName(user.name || "");
+      setEmail(user.email || "");
+      setRestaurantName(user.restaurantName || "");
+    }
+  }, [user]);
+  
 
   const handleLogin = (service) => {
     setConnectedServices((prev) => ({ ...prev, [service]: true }));
@@ -46,8 +71,8 @@ const Profile = () => {
               </label>
               <input
                 type="text"
-                value={ownerName}
-                onChange={(e) => setOwnerName(e.target.value)}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 className="w-full border p-2 rounded-lg mt-1 outline-none focus:ring-2 focus:ring-green-500 transition duration-300"
                 required
               />
@@ -71,6 +96,7 @@ const Profile = () => {
               <input
                 type="email"
                 value={email}
+                readOnly
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full border p-2 rounded-lg mt-1 outline-none focus:ring-2 focus:ring-green-500 transition duration-300"
                 required

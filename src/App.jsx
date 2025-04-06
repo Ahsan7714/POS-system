@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Route, Routes } from 'react-router-dom';
 import Main from './Pages/AdminDashboard/Mainpage/Main';
 import Orders from './Pages/AdminDashboard/Orders/Orders';
@@ -11,12 +11,17 @@ import Login from './Pages/AdminDashboard/Login/Login';
 import AdminPanel from './Pages/AdminDashboard/Admin Panel/AdminPanel';
 import Profile from './Pages/AdminDashboard/profile/Profile';
 import SocialMedia from './Pages/AdminDashboard/social/SocialMedia';
-
+import { Toaster } from 'react-hot-toast';
+import Store from "./redux/store.js";
+import { loadUser } from './redux/action/user';
+import { allOrder } from './redux/action/order.js';
 
 
 function App() {
-  
-
+  useEffect(()=>{
+    Store.dispatch(loadUser())
+    Store.dispatch(allOrder());
+  },[loadUser,allOrder])
   return (
    <>
    <Routes>
@@ -30,8 +35,9 @@ function App() {
     <Route path='/social' element={<SocialMedia/>}/>
     <Route path ='/' element={<Signup/>}/>
     <Route path='/login' element={<Login/>}/>
-    <Route path='/admin-user' element={<AdminPanel/>}/>
+    <Route path='/admin' element={<AdminPanel/>}/>
     </Routes>
+    <Toaster/>
    </>
   )
 }

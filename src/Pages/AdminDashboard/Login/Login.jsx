@@ -1,17 +1,32 @@
+import axios from "axios";
 import { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-
 import { IoRestaurantOutline } from "react-icons/io5";
 import { MdEmail } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { server } from "../../../server";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [visible, setVisible] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    axios.post(`${server}/user/login`,{email,password},{withCredentials:true}).then((res)=>{
+      toast.success(res.data.message),
+      setEmail(""),
+      setPassword("")
+      if(res.data.user.role === "Admin"){
+        navigate("/admin")
+      }else{
+        navigate("/dashboard")
+      }
+    }).catch((error)=>{
+      toast.error(error.response.data.message)
+    })
   };
 
   return (

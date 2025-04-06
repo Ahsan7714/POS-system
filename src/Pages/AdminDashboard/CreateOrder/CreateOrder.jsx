@@ -4,8 +4,15 @@ import AdminSidebar from "../../../Components/AdminSidebar/AdminSidebar";
 import { orderItems } from "../../../data/orderItems";
 import { FaPrint, FaWhatsapp, FaEnvelope } from "react-icons/fa";
 import { Mail, Printer } from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
+import { allMenuItems } from "../../../redux/action/menu";
 
 function CreateOrder() {
+  const {menuItems} = useSelector((state) => state.menu);
+  const dispatch = useDispatch();
+  useEffect(() =>{
+      dispatch(allMenuItems())
+    },[dispatch])
   const [orderDetails, setOrderDetails] = useState({
     customer: "",
     phone: "",
@@ -249,9 +256,9 @@ function CreateOrder() {
                     }
                     className="border rounded p-2 w-full"
                   >
-                    {orderItems.map((orderItem, i) => (
-                      <option key={i} value={orderItem.item}>
-                        {orderItem.item}
+                    {menuItems.map((orderItem, i) => (
+                      <option key={i} value={orderItem.name}>
+                        {orderItem.name}
                       </option>
                     ))}
                   </select>

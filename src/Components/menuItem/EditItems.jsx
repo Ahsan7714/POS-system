@@ -1,5 +1,8 @@
+import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { RxAvatar, RxUpload } from "react-icons/rx";
+import { RxAvatar} from "react-icons/rx";
+import { server } from "../../server";
+import toast from "react-hot-toast";
 
 const EditItems = ({ isOpen, onClose, item }) => {
   const [itemName, setItemName] = useState("");
@@ -14,26 +17,48 @@ const EditItems = ({ isOpen, onClose, item }) => {
       setItemPrice(item.price);
 
       const itemImage =
-        item.images && item.images[0] ? item.images[0].url : null;
+        item ? item.image : null;
       setImage(itemImage || RxAvatar);
     }
   }, [item, isOpen]);
 
   if (!isOpen) return null;
 
-  const handleImage = (e) => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      if (reader.readyState === 2) {
-        setImage(reader.result);
-      }
-    };
-    reader.readAsDataURL(e.target.files[0]);
+  const handleImage = async (e) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", "Restaurant-isris"); // replace this with your preset
+  
+    try {
+      const res = await fetch("https://api.cloudinary.com/v1_1/dt6skdss9/image/upload", {
+        method: "POST",
+        body: formData,
+      });
+  
+      const data = await res.json();
+      setImage(data.secure_url); // set image URL to state
+    } catch (error) {
+      console.error("Cloudinary upload failed", error);
+    }
   };
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onClose();
+    axios.put(`${server}/menu/updateItem/${item._id}`,{name:itemName,category:itemCategory,price:itemPrice,image:image},{withCredentials:true}).then((res)=>{
+      toast.success(res.data.message);
+      setItemName("");
+      setItemCategory("");
+      setItemPrice("");
+      setImage(null);
+      onClose();
+      window.location.reload();
+      onClose();
+    }).catch((error)=>{
+      toast.error(error.response.data.message);
+    })
+    
   };
   const triggerImageUpload = () => {
     document.getElementById("image").click();
@@ -85,7 +110,7 @@ const EditItems = ({ isOpen, onClose, item }) => {
               type="text"
               value={itemName}
               onChange={(e) => setItemName(e.target.value)}
-              className="w-full p-2 border border-gray-300 rounded-md mt-2"
+              className="w-full p-2 border border-gray-300 rounded-md mt-2 outline-none focus:border-green-500"
               placeholder="Enter item name"
             />
           </div>
@@ -98,7 +123,7 @@ const EditItems = ({ isOpen, onClose, item }) => {
               type="text"
               value={itemCategory}
               onChange={(e) => setItemCategory(e.target.value)}
-              className="w-full p-2 border border-gray-300 rounded-md mt-2"
+              className="w-full p-2 border border-gray-300 rounded-md mt-2 outline-none focus:border-green-500"
               placeholder="Enter item category"
             />
           </div>
@@ -111,7 +136,7 @@ const EditItems = ({ isOpen, onClose, item }) => {
               type="number"
               value={itemPrice}
               onChange={(e) => setItemPrice(e.target.value)}
-              className="w-full p-2 border border-gray-300 rounded-md mt-2"
+              className="w-full p-2 border border-gray-300 rounded-md mt-2 outline-none focus:border-green-500"
               placeholder="Enter item price"
             />
           </div>

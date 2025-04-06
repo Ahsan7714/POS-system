@@ -1,19 +1,34 @@
+import axios from "axios";
 import { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { CiUser } from "react-icons/ci";
 import { IoRestaurantOutline } from "react-icons/io5";
 import { MdEmail } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { server } from "../../../server";
+import toast from "react-hot-toast";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
-  const [RestaurantName, setRestaurantName] = useState("");
+  const [restaurantName, setRestaurantName] = useState("");
   const [password, setPassword] = useState("");
   const [visible, setVisible] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    axios.post(`${server}/user/create`,{name,restaurantName,password,email},{withCredentials:true}).then((res)=>{
+      toast.success(res.data.message),
+      setName("")
+      setPassword("")
+      setEmail("")
+      setRestaurantName("")
+      navigate("/login")
+    })
+    .catch((error)=>{
+      toast.error(error.response.data.message)
+    })
   };
 
   return (
@@ -52,7 +67,7 @@ const Signup = () => {
                 autoComplete="name"
                 placeholder="Restaurant Name "
                 required
-                value={RestaurantName}
+                value={restaurantName}
                 onChange={(e) => setRestaurantName(e.target.value)}
                 className="appearance-none block w-full px-8 py-1.5 border border-gray-400 rounded-full focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
               />

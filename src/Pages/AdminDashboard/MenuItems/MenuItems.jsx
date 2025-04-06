@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AdminSidebar from "../../../Components/AdminSidebar/AdminSidebar";
 import { AiOutlineDelete, AiOutlineEdit, AiOutlineSearch } from "react-icons/ai";
-import { menuItems } from "../../../data/menuItems";
 import AddItems from "../../../Components/menuItem/AddItems";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -11,14 +10,35 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import EditItems from "../../../Components/menuItem/EditItems";
+import { useDispatch, useSelector } from "react-redux";
+import { allMenuItems } from "../../../redux/action/menu";
+import axios from "axios";
+import { server } from "../../../server";
+import toast from "react-hot-toast";
 
 const MenuItems = () => {
+  const {menuItems} = useSelector((state)=> state.menu)
   const [searchTerm, setSearchTerm] = useState("");
   const [searchData, setSearchData] = useState([]);
   const [open, setOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [deleteItem, setDeleteItem] = useState(null);
+  const dispatch = useDispatch();
+
+  useEffect(() =>{
+    dispatch(allMenuItems())
+  },[dispatch])
+
+  const handleDelete = (id) =>{
+    axios.delete(`${server}/menu/deleteItem/${id}`,{withCredentials:true}).then((res)=>{
+      toast.success(res.data.message)
+      setDeleteItem(false)
+      dispatch(allMenuItems())
+    }).catch((error)=>{
+      toast.error(error.response.data.message)
+    })
+  }
 
   const handleSearchChange = (e) => {
     const term = e.target.value;
@@ -83,7 +103,7 @@ const MenuItems = () => {
                     onClick={() => handleSuggestionClick(item.name)}
                   >
                     <img
-                      src={item.images ? item.images[0].url : null}
+                      src={item ? item.image : null}
                       alt={item.name}
                       className="w-[40px] h-[40px] mr-[10px] rounded"
                     />
@@ -177,7 +197,7 @@ const MenuItems = () => {
                       <TableCell>{index + 1}</TableCell>
                       <TableCell>{item.name}</TableCell>
                       <TableCell>{item.category}</TableCell>
-                      <TableCell>{item.price}</TableCell>
+                      <TableCell>£{item.price}</TableCell>
                       <TableCell>
                         <div className="flex gap-4">
                           <button
@@ -186,7 +206,7 @@ const MenuItems = () => {
                           >
                             <AiOutlineEdit size={20} />
                           </button>
-                          <button className="text-red-700" onClick={()=> setDeleteItem(true)}>
+                          <button className="text-red-700" onClick={()=> setDeleteItem(true) || setDeleteItem(item)}>
                             <AiOutlineDelete size={20}/>
                           </button>
                         </div>
@@ -201,13 +221,13 @@ const MenuItems = () => {
       </div>
 
       <EditItems isOpen={editOpen} onClose={EditClose} item={selectedItem} />
-      <DeleteItem isOpen={deleteItem} onClose={()=> setDeleteItem(false)} />
+      <DeleteItem isOpen={deleteItem} onClose={()=> setDeleteItem(false)} handleDelete={handleDelete} item={deleteItem} />
     </div>
   );
 };
 
 
-export const DeleteItem = ({isOpen, onClose}) => {
+export const DeleteItem = ({isOpen, onClose,handleDelete,item}) => {
   return (
     <div>
       {isOpen && (
@@ -216,7 +236,7 @@ export const DeleteItem = ({isOpen, onClose}) => {
             <h1 className="text-2xl font-semibold">Are you sure you want to delete this item?</h1>
             <div className="flex justify-center gap-4 mt-5">
               <button className="bg-red-500 text-white px-4 py-2 rounded-md transition hover:scale-105" onClick={onClose}>No</button>
-              <button className="bg-green-500 text-white px-4 py-2 rounded-md transition hover:scale-105" onClick={onClose}>Yes</button>
+              <button className="bg-green-500 text-white px-4 py-2 rounded-md transition hover:scale-105" onClick={()=>handleDelete(item._id)}>Yes</button>
             </div>
           </div>
         </div>
