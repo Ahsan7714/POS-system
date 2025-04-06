@@ -8,24 +8,30 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { kitchOrder } from "../../../data/kitchen";
+import { useSelector } from "react-redux";
+import axios from "axios";
+import { server } from "../../../server";
+import toast from "react-hot-toast";
 
 const Kitchen = () => {
+  const {orders} = useSelector((state)=> state.order)
+  const {user} = useSelector((state) => state.user);
   const [filter, setFilter] = useState("All");
-  const [orders, setOrders] = useState(kitchOrder);
 
   const filteredOrders = 
   filter == "All" ? orders : orders.filter((order) => order.status === filter);
+
+  const statusChange = (id) =>{
+    axios.put(`${server}/order/changeStatus/${id}`,{},{withCredentials:true}).then((res)=>{
+      toast.success(res.data.message);
+      window.location.reload()
+    }).catch((error)=>{
+      toast.error(error.response.data.message);
+    })
+  }
   
 
-  // Toggle status on click
-  const toggleStatus = (index) => {
-    const updatedOrders = orders.map((order, i) =>
-      i === index
-        ? { ...order, status: order.status === "Pending" ? "Ready" : "Pending" }
-        : order
-    );
-    setOrders(updatedOrders);
-  };
+  
 
   return (
     <div className="flex font-outfit">
@@ -113,12 +119,19 @@ const Kitchen = () => {
                   {filteredOrders.map((order, index) => (
                     <TableRow key={index}>
                       <TableCell><div className="flex text-[15px]">{index + 1}</div></TableCell>
-                      <TableCell><div className="flex text-[15px]"> {order.platform}</div></TableCell>
-                      <TableCell><div className="flex text-[15px]">{order.orderItem}</div></TableCell>
+                      <TableCell><div className="flex text-[15px]"> {user.restaurantName}</div></TableCell>
+                      <TableCell> <div className="flex flex-col gap-1 text-sm">
+          {order.items.map((orderItem, idx) => (
+            <div key={idx} className="flex justify-between">
+              <span>{orderItem.quantity}  {orderItem.item}</span>
+              
+            </div>
+          ))}
+        </div></TableCell>
                       <TableCell><div className="flex text-[15px]">{order.orderType}</div></TableCell>
                       <TableCell>
                         <button
-                          onClick={() => toggleStatus(index)}
+                          onClick={() => statusChange(order._id)}
                           className={`${
                             order.status === "Pending" ? "text-red-500 text-[15px]" : "text-green-500 text-[15px]"
                           }`}

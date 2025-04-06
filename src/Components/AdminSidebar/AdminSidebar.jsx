@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   FaTachometerAlt,
   FaClipboardList,
@@ -9,9 +9,23 @@ import {
 } from "react-icons/fa"; // Import icons
 import { FaKitchenSet } from "react-icons/fa6";
 import { IoShareSocialOutline } from "react-icons/io5";
+import { AiOutlineLogout } from "react-icons/ai";
+import toast from "react-hot-toast";
+import axios from "axios";
+import { server } from "../../server";
 
 function AdminSidebar() {
   const location = useLocation();
+  const navigate = useNavigate()
+
+  const logoutHandler = () =>{
+    axios.get(`${server}/user/logout`,{withCredentials:true}).then((res)=>{
+      toast.success(res.data.message);
+      navigate("/login")
+    }).catch((error)=>{
+      toast.error(error.response.data.message);
+    })
+  }
 
   return (
     <div className="fixed left-0 top-0 bg-white h-full overflow-y-auto w-[22%] content-scrollbar font-outfit">
@@ -94,17 +108,6 @@ function AdminSidebar() {
         </Link>
 
         <Link
-          to="/profile"
-          className={`${
-            location.pathname === "/profile"
-              ? "bg-green-500 text-white"
-              : "text-[#000000a5]"
-          } flex gap-2 items-center text-[20px] h-10 px-4 rounded-md`}
-        >
-          <FaCog size={20} /> {/* Icon for Settings */}
-          <p>Profile</p>
-        </Link>
-        <Link
           to="/social"
           className={`${
             location.pathname === "/social"
@@ -115,6 +118,28 @@ function AdminSidebar() {
           <IoShareSocialOutline size={20} /> {/* Icon for Settings */}
           <p>Social App</p>
         </Link>
+
+
+        <Link
+          to="/profile"
+          className={`${
+            location.pathname === "/profile"
+              ? "bg-green-500 text-white"
+              : "text-[#000000a5]"
+          } flex gap-2 items-center text-[20px] h-10 px-4 rounded-md`}
+        >
+          <FaCog size={20} /> {/* Icon for Settings */}
+          <p>Profile</p>
+        </Link>
+
+         <button
+              onClick={logoutHandler}
+              className="flex gap-2 items-center text-[20px] font-semibold h-10 px-4 rounded-md text-[#000000a5]"
+            >
+              <AiOutlineLogout size={20} />
+              <span className="text-lg">Logout</span>
+            </button>
+        
       </div>
     </div>
   );

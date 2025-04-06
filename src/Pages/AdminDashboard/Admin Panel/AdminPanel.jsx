@@ -6,7 +6,7 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import { AiOutlineUser } from "react-icons/ai";
+import { AiOutlineLogout, AiOutlineUser } from "react-icons/ai";
 import { MdDeleteOutline } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -14,16 +14,28 @@ import { allUser } from "../../../redux/action/user";
 import axios from "axios";
 import { server } from "../../../server";
 import toast from "react-hot-toast";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const AdminPanel = () => {
   const { users } = useSelector((state) => state.user);
   const [open, setOpen] = useState(false);
   const [id, setId] = useState("");
   const dispatch = useDispatch();
+  const location = useLocation();
+  const navigate = useNavigate()
 
   useEffect(() => {
     dispatch(allUser());
   }, [dispatch]);
+
+  const logoutHandler = () =>{
+    axios.get(`${server}/user/logout`,{withCredentials:true}).then((res)=>{
+      toast.success(res.data.message);
+      navigate("/login")
+    }).catch((error)=>{
+      toast.error(error.response.data.message);
+    })
+  }
 
   const handleDelete = async (id) => {
     axios
@@ -39,15 +51,31 @@ const AdminPanel = () => {
   };
   return (
     <div className="flex min-h-screen font-outfit bg-gray-100">
-      <div className="w-64 bg-green-500 text-white flex flex-col p-5">
-        <h2 className="text-2xl font-bold mb-6">Admin Panel</h2>
-        <nav className="space-y-4">
-          <div className="flex items-center space-x-3 hover:text-green-200 cursor-pointer">
-            <AiOutlineUser size={20} />
-            <span className="text-lg font-medium">Users</span>
-          </div>
-        </nav>
-      </div>
+      <div className="w-64 bg-gradient-to-b from-green-600 to-green-800 text-white flex flex-col py-8 px-6 shadow-lg rounded-r-xl">
+  <h2 className="text-3xl font-bold mb-10 tracking-wide text-center">Admin</h2>
+  <nav className="space-y-4">
+    <Link
+      to="/admin"
+      className={`${
+        location.pathname === "/admin"
+          ? "bg-white text-green-700 font-semibold"
+          : "text-white hover:bg-green-700 hover:bg-opacity-70"
+      } flex items-center gap-3 py-3 px-4 rounded-lg transition-all duration-300`}
+    >
+      <AiOutlineUser size={22} />
+      <span className="text-lg">Users</span>
+    </Link>
+
+    <button
+      onClick={logoutHandler}
+      className="flex items-center gap-3 py-3 px-4 rounded-lg text-white"
+    >
+      <AiOutlineLogout size={22} />
+      <span className="text-lg">Logout</span>
+    </button>
+  </nav>
+</div>
+
 
       <div className="pt-10 w-full px-10">
         <h1 className="text-3xl font-semibold text-gray-800 mb-6">All User</h1>
