@@ -15,6 +15,7 @@ import { Toaster } from 'react-hot-toast';
 import Store from "./redux/store.js";
 import { loadUser } from './redux/action/user';
 import { allOrder } from './redux/action/order.js';
+import Category from './Pages/AdminDashboard/CreateOrder/Category.jsx';
 
 
 function App() {
@@ -27,7 +28,7 @@ function App() {
    <Routes>
     <Route path='/dashboard' element = {<Main />} />
     <Route path="/orders" element={<Orders />} />
-    <Route path="/create-order" element={<CreateOrder />} />
+    <Route path="/create-order" element={<Category />} />
     <Route path='/analytics' element={<Analytics />} />
     <Route path="/menu-items" element={<MenuItems />} />
     <Route path='/kitchen' element={<Kitchen />} />
