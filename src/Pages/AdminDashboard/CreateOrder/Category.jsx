@@ -1,29 +1,62 @@
 import React, { useState } from "react";
 import AdminSidebar from "../../../Components/AdminSidebar/AdminSidebar";
+import { motion, AnimatePresence } from "framer-motion";
+
 
 function Category() {
-  const [expandedCategories, setExpandedCategories] = useState({});
-  const [checkedItems, setCheckedItems] = useState({});
+  const [showModal, setShowModal] = useState(false);
+  const [currentCategory, setCurrentCategory] = useState(null);
   const [selectedItems, setSelectedItems] = useState({});
   const [orderType, setOrderType] = useState("dine-in");
   const [customerDetails, setCustomerDetails] = useState({
     name: "",
     phone: "",
     address: "",
+    paymentMethod: "",
   });
 
   const category = [
     {
       id: 1,
-      name: "Burgers",
+      name: "Burger",
       image:
         "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?q=80&w=1480&auto=format&fit=crop",
       subcategories: [
-        { id: 101, name: "Cheese Burger", price: 6 },
-        { id: 102, name: "Chicken Burger", price: 7 },
-        { id: 103, name: "Spicy Burger", price: 6 },
-        { id: 104, name: "BBQ Burger", price: 7 },
-        { id: 105, name: "Mushroom Burger", price: 6 },
+        {
+          id: 101,
+          name: "Cheese Burger",
+          price: 6,
+          image:
+            "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?q=80&w=1480&auto=format&fit=crop",
+        },
+        {
+          id: 102,
+          name: "Chicken Burger",
+          price: 7,
+          image:
+            "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?q=80&w=1480&auto=format&fit=crop",
+        },
+        {
+          id: 103,
+          name: "Spicy Burger",
+          price: 6,
+          image:
+            "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?q=80&w=1480&auto=format&fit=crop",
+        },
+        {
+          id: 104,
+          name: "BBQ Burger",
+          price: 7,
+          image:
+            "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?q=80&w=1480&auto=format&fit=crop",
+        },
+        {
+          id: 105,
+          name: "Mushroom Burger",
+          price: 6,
+          image:
+            "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?q=80&w=1480&auto=format&fit=crop",
+        },
       ],
     },
     {
@@ -32,65 +65,104 @@ function Category() {
       image:
         "https://images.unsplash.com/photo-1700760934249-93efbb574d23?q=80&w=1480&auto=format&fit=crop",
       subcategories: [
-        { id: 201, name: "Chicken Supreme", price: 11 },
-        { id: 202, name: "Pepperoni", price: 10 },
-        { id: 203, name: "BBQ Chicken", price: 11 },
-        { id: 204, name: "Vegetarian", price: 10 },
-        { id: 205, name: "Crown Crust", price: 12 },
+        {
+          id: 201,
+          name: "Chicken Supreme",
+          price: 11,
+          image:
+            "https://images.unsplash.com/photo-1700760934249-93efbb574d23?q=80&w=1480&auto=format&fit=crop",
+        },
+        {
+          id: 202,
+          name: "Pepperoni Pizza",
+          price: 10,
+          image:
+            "https://images.unsplash.com/photo-1700760934249-93efbb574d23?q=80&w=1480&auto=format&fit=crop",
+        },
+        {
+          id: 203,
+          name: "BBQ Chicken",
+          price: 11,
+          image:
+            "https://images.unsplash.com/photo-1700760934249-93efbb574d23?q=80&w=1480&auto=format&fit=crop",
+        },
+        {
+          id: 204,
+          name: "Vegetarian Pizza",
+          price: 10,
+          image:
+            "https://images.unsplash.com/photo-1700760934249-93efbb574d23?q=80&w=1480&auto=format&fit=crop",
+        },
+        {
+          id: 205,
+          name: "Crown Crust",
+          price: 12,
+          image:
+            "https://images.unsplash.com/photo-1700760934249-93efbb574d23?q=80&w=1480&auto=format&fit=crop",
+        },
       ],
     },
     {
       id: 3,
-      name: "Drinks",
+      name: "Drink",
       image:
         "https://images.unsplash.com/photo-1657101455328-6821c90b0ad3?q=80&w=1481&auto=format&fit=crop",
       subcategories: [
-        { id: 301, name: "Coca Cola", price: 2 },
-        { id: 302, name: "Pepsi", price: 2 },
-        { id: 303, name: "Fanta", price: 2 },
-        { id: 304, name: "Sprite", price: 2 },
-        { id: 305, name: "Water", price: 1 },
+        {
+          id: 301,
+          name: "Coca Cola",
+          price: 2,
+          image:
+            "https://images.unsplash.com/photo-1657101455328-6821c90b0ad3?q=80&w=1481&auto=format&fit=crop",
+        },
+        {
+          id: 302,
+          name: "Pepsi",
+          price: 2,
+          image:
+            "https://images.unsplash.com/photo-1657101455328-6821c90b0ad3?q=80&w=1481&auto=format&fit=crop",
+        },
+        {
+          id: 303,
+          name: "Fanta",
+          price: 2,
+          image:
+            "https://images.unsplash.com/photo-1657101455328-6821c90b0ad3?q=80&w=1481&auto=format&fit=crop",
+        },
+        {
+          id: 304,
+          name: "Sprite",
+          price: 2,
+          image:
+            "https://images.unsplash.com/photo-1657101455328-6821c90b0ad3?q=80&w=1481&auto=format&fit=crop",
+        },
+        {
+          id: 305,
+          name: "Water",
+          price: 1,
+          image:
+            "https://images.unsplash.com/photo-1657101455328-6821c90b0ad3?q=80&w=1481&auto=format&fit=crop",
+        },
       ],
     },
   ];
 
-  const handleCategoryClick = (categoryId) => {
-    setExpandedCategories((prev) => ({
-      ...prev,
-      [categoryId]: !prev[categoryId],
-    }));
+  const openSubcategoryModal = (cat) => {
+    setCurrentCategory(cat);
+    setShowModal(true);
   };
 
-  const handleCheckboxChange = (catId, subId, item) => {
-    const key = `${catId}-${subId}`;
-    const isChecked = !checkedItems[key];
-
-    setCheckedItems((prev) => ({
-      ...prev,
-      [key]: isChecked,
-    }));
-
+  const handleQuantityChange = (item, delta) => {
+    const key = `${item.id}`;
     setSelectedItems((prev) => {
       const updated = { ...prev };
-      if (isChecked) {
-        updated[key] = { ...item, quantity: 1 };
-      } else {
+      const existing = updated[key] || { ...item, quantity: 0 };
+      existing.quantity += delta;
+
+      if (existing.quantity <= 0) {
         delete updated[key];
-      }
-      return updated;
-    });
-  };
-
-  const handleQuantityChange = (key, delta) => {
-    setSelectedItems((prev) => {
-      const updated = { ...prev };
-      if (updated[key]) {
-        const newQty = updated[key].quantity + delta;
-        if (newQty <= 0) {
-          delete updated[key];
-        } else {
-          updated[key].quantity = newQty;
-        }
+      } else {
+        updated[key] = existing;
       }
       return updated;
     });
@@ -117,7 +189,6 @@ function Category() {
       totalPrice,
     };
     console.log("Order Submitted:", orderData);
-    // Add API call here
   };
 
   return (
@@ -132,46 +203,17 @@ function Category() {
           {category.map((cat) => (
             <div
               key={cat.id}
-              className="border rounded-lg overflow-hidden shadow-lg"
+              className="border rounded-lg overflow-hidden shadow-lg cursor-pointer"
+              onClick={() => openSubcategoryModal(cat)}
             >
               <img
                 src={cat.image}
                 alt={cat.name}
-                className="w-full h-50 object-cover cursor-pointer"
-                onClick={() => handleCategoryClick(cat.id)}
+                className="w-full h-50 object-cover"
               />
               <div className="p-4">
-                <h2
-                  className="text-xl font-semibold cursor-pointer"
-                  onClick={() => handleCategoryClick(cat.id)}
-                >
-                  {cat.name}
-                </h2>
+                <h2 className="text-xl font-semibold">{cat.name}</h2>
               </div>
-
-              {expandedCategories[cat.id] && (
-                <div className="p-4 border-t bg-gray-50">
-                  {cat.subcategories.map((sub) => (
-                    <div
-                      key={sub.id}
-                      className="flex justify-between items-center py-2 border-b"
-                    >
-                      <div>
-                        <p className="font-medium">{sub.name}</p>
-                        <p className="text-sm text-gray-500">${sub.price}</p>
-                      </div>
-                      <input
-                        type="checkbox"
-                        checked={!!checkedItems[`${cat.id}-${sub.id}`]}
-                        onChange={() =>
-                          handleCheckboxChange(cat.id, sub.id, sub)
-                        }
-                        className="w-5 h-5 cursor-pointer"
-                      />
-                    </div>
-                  ))}
-                </div>
-              )}
             </div>
           ))}
         </div>
@@ -204,9 +246,6 @@ function Category() {
               placeholder="Customer Name"
               className="w-full border p-2 rounded"
             />
-           
-            
-
             {(orderType === "delivery" || orderType === "takeaway") && (
               <input
                 name="phone"
@@ -216,7 +255,6 @@ function Category() {
                 className="w-full border p-2 rounded"
               />
             )}
-
             {orderType === "delivery" && (
               <input
                 name="address"
@@ -228,12 +266,13 @@ function Category() {
             )}
             <select
               name="paymentMethod"
+              value={customerDetails.paymentMethod}
               onChange={handleCustomerChange}
               className="w-full border p-2 rounded"
             >
               <option value="">Select Payment Method</option>
               <option value="cash">Cash</option>
-              <option value="card"> Card</option>
+              <option value="card">Card</option>
               <option value="online">Online</option>
             </select>
           </div>
@@ -251,32 +290,101 @@ function Category() {
                 <span>{item.name}</span>
                 <div className="flex items-center gap-2">
                   <button
-                    onClick={() => handleQuantityChange(key, -1)}
+                    onClick={() => handleQuantityChange(item, -1)}
                     className="px-2 py-1 bg-gray-200 rounded"
                   >
                     -
                   </button>
                   <span>{item.quantity}</span>
                   <button
-                    onClick={() => handleQuantityChange(key, 1)}
-                    className="px-2 py-1 bg-gray-200 rounded "
+                    onClick={() => handleQuantityChange(item, 1)}
+                    className="px-2 py-1 bg-gray-200 rounded"
                   >
                     +
                   </button>
-                  <span className="ml-4 mr-4">${item.price * item.quantity}</span>
+                  <span className="ml-4 mr-4">
+                    ${item.price * item.quantity}
+                  </span>
                 </div>
               </div>
             ))}
-            <div className="text-right font-bold mt-4">
-              Total: ${totalPrice.toFixed(2)}
+            <div className="text-right mt-4 font-semibold">
+              Total: ${totalPrice}
             </div>
             <button
               onClick={handleOrderSubmit}
-              className="mt-6 w-full bg-green-600 text-white py-2 rounded hover:bg-green-700"
+              className="mt-4 p-2 w-full  item bg-green-600 text-white rounded"
             >
-              Create Order
+              Submit Order
             </button>
           </div>
+        )}
+
+        {/* Modal */}
+        {showModal && currentCategory && (
+          <motion.div
+          key="modal"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+            <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+             className="w-full relative bg-gradient-to-br from-white to-gray-100 max-w-4xl  p-6 rounded-lg shadow-2xl border border-gray-200  overflow-y-auto max-h-[80vh] ">
+              <motion.button
+                onClick={() => setShowModal(null)}
+                className="absolute top-2 right-2 "
+              >
+                <span className="text-4xl font-bold text-gray-700 hover:text-green-500"> &times;</span>
+               
+              </motion.button>
+              <h2 className="text-2xl font-bold mb-4">
+                Choose {currentCategory.name} 
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {currentCategory.subcategories.map((item) => {
+                  const existing = selectedItems[item.id];
+                  return (
+                    <div
+                      key={item.id}
+                      className="border rounded-lg shadow  flex flex-col"
+                    >
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="w-45 h-22 object-cover rounded "
+                      />
+                      <div className="p-3 flex flex-col items-center text-center ">
+                        <h3 className="text-lg font-semibold">{item.name}</h3>
+                        <p className="text-gray-600 mb-2">${item.price}</p>
+
+                        <div className="flex gap-3 items-center">
+                          <button
+                            onClick={() => handleQuantityChange(item, -1)}
+                            className="bg-red-500 text-white p-2 rounded text-2xl flex items-center justify-center"
+                          >
+                            -
+                          </button>
+                          <span className=" text-[20px]">
+                            {existing ? existing.quantity : 0}
+                          </span>
+                          <button
+                            onClick={() => handleQuantityChange(item, 1)}
+                            className="bg-green-500 text-white p-2 rounded text-2xl flex items-center justify-center "
+                          >
+                            +
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </motion.div>
+          </motion.div>
         )}
       </div>
     </div>
