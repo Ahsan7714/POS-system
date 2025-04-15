@@ -8,7 +8,6 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { AiOutlineLogout, AiOutlineUser } from "react-icons/ai";
 import { FaUserCircle } from "react-icons/fa";
-import { MdDeleteOutline } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { allUser } from "../../../redux/action/user";
@@ -16,12 +15,10 @@ import axios from "axios";
 import { server } from "../../../server";
 import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import {users} from "../../../data/user"
+// import {users} from "../../../data/user"
 
 const AdminPanel = () => {
-  // const { users } = useSelector((state) => state.user);
-  const [open, setOpen] = useState(false);
-  const [id, setId] = useState("");
+  const { users } = useSelector((state) => state.user);
   const [filter,setFilter] =useState("All")
   const dispatch = useDispatch();
   const location = useLocation();
@@ -44,12 +41,11 @@ const AdminPanel = () => {
     })
   }
 
-  const handleDelete = async (id) => {
+  const handleUpdate = async (id) => {
     axios
-      .delete(`${server}/user/deleteUser/${id}`)
+      .put(`${server}/user/updateStatus/${id}`,{},{withCredentials:true})
       .then((res) => {
         toast.success(res.data.message);
-        setOpen(false);
         dispatch(allUser());
       })
       .catch((error) => {
@@ -198,7 +194,7 @@ const AdminPanel = () => {
                       {index + 1}
                     </TableCell>
                     <TableCell className="flex text-[15px]">
-                      {user.ownerName}
+                      {user.name}
                     </TableCell>
                     <TableCell className="flex text-[15px]">
                       {user.restaurantName}
@@ -207,17 +203,15 @@ const AdminPanel = () => {
                       {user.email}
                     </TableCell>
                     <TableCell className="flex text-[15px]">
-                      {user.pkgExpDate}
+                    {user.pkgExpiry ? new Date(user.pkgExpiry).toISOString().split("T")[0] : "N/A"}
                     </TableCell>
                     <TableCell>
                       <button
-                        className="text-red-600 hover:text-red-800"
+                       className={`font-semibold text-[15px] ${user.status === "Active" ? "text-green-600 hover:text-green-500" : "text-red-600 hover:text-red-500"}`}
                         onClick={() => {
-                          setOpen(true);
-                          setId(user._id);
+                          handleUpdate(user._id);
                         }}
                       >
-                        {/* <MdDeleteOutline size={32} /> */}
                         {user.status}
                       </button>
                     </TableCell>
@@ -228,7 +222,7 @@ const AdminPanel = () => {
           </TableContainer>
         </Paper>
       </div>
-      {open && (
+      {/* {open && (
         <div className="fixed inset-0 z-[999] bg-black bg-opacity-50 flex items-center justify-center">
           <div className="bg-white rounded-lg shadow-xl w-[90%] md:w-[40%] p-5 relative">
             
@@ -251,7 +245,7 @@ const AdminPanel = () => {
             </div>
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 };

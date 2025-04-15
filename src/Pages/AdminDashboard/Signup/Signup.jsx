@@ -39,7 +39,7 @@ const Signup = () => {
     axios
       .post(
         `${server}/user/create`,
-        { name, restaurantName, password, email },
+        {restaurantName,address,type,contactNo,email,name,password,subscriptionType},
         { withCredentials: true }
       )
       .then((res) => {
@@ -169,7 +169,7 @@ const Signup = () => {
 
                 <div className=" relative mb-4">
                 <input
-                    type="number"
+                    type="text"
                     autoComplete="off"
                     placeholder="Contact Number"
                     required

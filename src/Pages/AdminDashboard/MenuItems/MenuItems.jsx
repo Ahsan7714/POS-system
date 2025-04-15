@@ -12,13 +12,13 @@ import TableRow from "@mui/material/TableRow";
 import EditItems from "../../../Components/menuItem/EditItems";
 import { useDispatch, useSelector } from "react-redux";
 import { allMenuItems } from "../../../redux/action/menu";
-import { menuItems } from "../../../data/menuItems";
+// import { menuItems } from "../../../data/menuItems";
 import axios from "axios";
 import { server } from "../../../server";
 import toast from "react-hot-toast";
 
 const MenuItems = () => {
-  // const {menuItems} = useSelector((state)=> state.menu)
+  const {menuItems} = useSelector((state)=> state.menu)
   const [searchTerm, setSearchTerm] = useState("");
   const [searchData, setSearchData] = useState([]);
   const [open, setOpen] = useState(false);
