@@ -8,6 +8,7 @@ const EditItems = ({ isOpen, onClose, item }) => {
   const [itemName, setItemName] = useState("");
   const [itemCategory, setItemCategory] = useState("");
   const [itemPrice, setItemPrice] = useState("");
+  const [platforms, setPlatforms] = useState([]);
   const [image, setImage] = useState(null);
 
   useEffect(() => {
@@ -15,6 +16,7 @@ const EditItems = ({ isOpen, onClose, item }) => {
       setItemName(item.name);
       setItemCategory(item.category);
       setItemPrice(item.price);
+      setPlatforms(item.platforms || []);
 
       const itemImage =
         item ? item.image : null;
@@ -46,7 +48,7 @@ const EditItems = ({ isOpen, onClose, item }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.put(`${server}/menu/updateItem/${item._id}`,{name:itemName,category:itemCategory,price:itemPrice,image:image},{withCredentials:true}).then((res)=>{
+    axios.put(`${server}/menu/updateItem/${item._id}`,{name:itemName,category:itemCategory,price:itemPrice,image:image,platforms:platforms},{withCredentials:true}).then((res)=>{
       toast.success(res.data.message);
       setItemName("");
       setItemCategory("");
@@ -63,6 +65,14 @@ const EditItems = ({ isOpen, onClose, item }) => {
   const triggerImageUpload = () => {
     document.getElementById("image").click();
   };
+
+  const handleCheckboxChange = (e) => {
+    const value = e.target.value;
+    setPlatforms((prev) =>
+      prev.includes(value) ? prev.filter((p) => p !== value) : [...prev, value]
+    );
+  };
+  
 
   return (
     <div className="fixed pt-3 pb-3  inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -116,17 +126,25 @@ const EditItems = ({ isOpen, onClose, item }) => {
           </div>
 
           <div className="mt-4">
-            <label className="block text-sm font-medium text-gray-700">
-              Item Category
-            </label>
-            <input
-              type="text"
-              value={itemCategory}
-              onChange={(e) => setItemCategory(e.target.value)}
-              className="w-full p-2 border border-gray-300 rounded-md mt-2 outline-none focus:border-green-500"
-              placeholder="Enter item category"
-            />
-          </div>
+  <label className="block text-sm font-medium text-gray-700">
+    Item Category
+  </label>
+  <select
+    value={itemCategory}
+    onChange={(e) => setItemCategory(e.target.value)}
+    className="w-full p-2 border border-gray-300 rounded-md mt-2 outline-none focus:border-green-500"
+  >
+    <option value="Burger">Burger</option>
+    <option value="Pizza">Pizza</option>
+    <option value="Snacks">Snacks</option>
+    <option value="Desserts">Desserts</option>
+    <option value="Drinks">Drinks</option>
+    <option value="Beverages">Beverages</option>
+    <option value="Soups">Soups</option>
+    <option value="Salads">Salads</option>
+  </select>
+</div>
+
 
           <div className="mt-4">
             <label className="block text-sm font-medium text-gray-700">
@@ -141,20 +159,21 @@ const EditItems = ({ isOpen, onClose, item }) => {
             />
           </div>
 
-          <div className=" mt-4 flex justify-between">
-            <div className=" flex gap-2 items-center ">
-              <input type="checkbox" className=" w-4 h-4" />
-              <span className=" font-semibold">🍴 Deliveroo</span>
-            </div>
-            <div className=" flex gap-2 items-center ">
-              <input type="checkbox" className=" w-4 h-4" />
-              <span className=" font-semibold">🍔 JustEat</span>
-            </div>
-            <div className=" flex gap-2 items-center ">
-              <input type="checkbox" className=" w-4 h-4" />
-              <span className=" font-semibold">🍕 UberEats</span>
-            </div>
-          </div>
+          <div className="mt-4 flex justify-between flex-wrap gap-3">
+  {["Deliveroo", "JustEat", "UberEats", "IRIS"].map((platform) => (
+    <label key={platform} className="flex gap-2 items-center">
+      <input
+        type="checkbox"
+        value={platform}
+        checked={platforms.includes(platform)}
+        onChange={handleCheckboxChange}
+        className="w-4 h-4"
+      />
+      <span className="font-semibold">{platform}</span>
+    </label>
+  ))}
+</div>
+
 
           <button
             type="submit"

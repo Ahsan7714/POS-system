@@ -43,8 +43,8 @@ const Kitchen = () => {
             onClick={() => setFilter("All")}
             className={`bg-white flex text-[19px] px-10 py-2.5 shadow-sm ${
               filter === "All"
-                ? "text-red-500 border-b-4 border-red-500 rounded-md"
-                : "hover:text-red-500 hover:bg-gray-50"
+                 ? "text-green-500 border-b-4 border-green-500 rounded-md"
+                : "hover:text-green-500 hover:bg-gray-50"
             }`}
           >
             All
@@ -53,8 +53,8 @@ const Kitchen = () => {
             onClick={() => setFilter("Pending")}
             className={`bg-white flex text-[19px] px-10 py-2.5 shadow-sm ${
               filter === "Pending"
-                ? "text-red-500 border-b-4 border-red-500 rounded-md"
-                : "hover:text-red-500 hover:bg-gray-50"
+                ? "text-green-500 border-b-4 border-green-500 rounded-md"
+                : "hover:text-green-500 hover:bg-gray-50"
             }`}
           >
             Pending
@@ -63,8 +63,8 @@ const Kitchen = () => {
             onClick={() => setFilter("Ready")}
             className={`bg-white flex text-[19px] px-10 py-2.5 shadow-sm ${
               filter === "Ready"
-                ? "text-red-500 border-b-4 border-red-500 rounded-md"
-                : "hover:text-red-500 hover:bg-gray-50"
+                ? "text-green-500 border-b-4 border-green-500 rounded-md"
+                : "hover:text-green-500 hover:bg-gray-50"
             }`}
           >
             Ready

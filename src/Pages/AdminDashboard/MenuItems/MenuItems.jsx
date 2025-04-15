@@ -12,6 +12,7 @@ import TableRow from "@mui/material/TableRow";
 import EditItems from "../../../Components/menuItem/EditItems";
 import { useDispatch, useSelector } from "react-redux";
 import { allMenuItems } from "../../../redux/action/menu";
+// import { menuItems } from "../../../data/menuItems";
 import axios from "axios";
 import { server } from "../../../server";
 import toast from "react-hot-toast";
