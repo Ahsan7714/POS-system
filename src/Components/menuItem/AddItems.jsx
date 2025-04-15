@@ -116,17 +116,26 @@ const AddItems = ({ isOpen, onClose }) => {
           </div>
 
           <div className="mt-4">
-            <label className="block text-sm font-medium text-gray-700">
-              Item Category
-            </label>
-            <input
-              type="text"
-              value={itemCategory}
-              onChange={(e) => setItemCategory(e.target.value)}
-              className="w-full p-2 border border-gray-300 rounded-md mt-2 outline-none focus:border-green-500"
-              placeholder="Enter item category"
-            />
-          </div>
+  <label className="block text-sm font-medium text-gray-700">
+    Item Category
+  </label>
+  <select
+    value={itemCategory}
+    onChange={(e) => setItemCategory(e.target.value)}
+    className="w-full p-2 border border-gray-300 rounded-md mt-2 outline-none focus:border-green-500"
+  >
+    <option value="">Select a category</option>
+    <option value="Burger">Burger</option>
+    <option value="Pizza">Pizza</option>
+    <option value="Snacks">Snacks</option>
+    <option value="Desserts">Desserts</option>
+    <option value="Drinks">Drinks</option>
+    <option value="Beverages">Beverages</option>
+    <option value="Soups">Soups</option>
+    <option value="Salads">Salads</option>
+  </select>
+</div>
+
 
           <div className="mt-4">
             <label className="block text-sm font-medium text-gray-700">
@@ -144,15 +153,19 @@ const AddItems = ({ isOpen, onClose }) => {
           <div className=" mt-4 flex justify-between">
             <div className=" flex gap-2 items-center ">
               <input type="checkbox" className=" w-4 h-4" />
-              <span className=" font-semibold">🍴 Deliveroo</span>
+              <span className=" font-semibold">Deliveroo</span>
             </div>
             <div className=" flex gap-2 items-center ">
               <input type="checkbox" className=" w-4 h-4" />
-              <span className=" font-semibold">🍔 JustEat</span>
+              <span className=" font-semibold">JustEat</span>
             </div>
             <div className=" flex gap-2 items-center ">
               <input type="checkbox" className=" w-4 h-4" />
-              <span className=" font-semibold">🍕 UberEats</span>
+              <span className=" font-semibold">UberEats</span>
+            </div>
+            <div className=" flex gap-2 items-center ">
+              <input type="checkbox" className=" w-4 h-4" />
+              <span className=" font-semibold">IRIS</span>
             </div>
           </div>
          

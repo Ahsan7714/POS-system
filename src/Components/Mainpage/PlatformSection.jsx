@@ -4,7 +4,7 @@ import { ExternalLink, TrendingUp, Clock, DollarSign } from 'lucide-react';
 const platformColors = {
   Deliveroo: 'bg-[#06a88f]',  // A balanced dark teal for Deliveroo
 JustEat: 'bg-[#e8790d]',    // A rich amber for JustEat
-Lyft: 'bg-[#9b1d7d]',       // A deep magenta for Lyft
+IRIS: 'bg-[#9b1d7d]',       // A deep magenta for Lyft
 
   UberEats: 'bg-black',
 };
@@ -12,7 +12,7 @@ Lyft: 'bg-[#9b1d7d]',       // A deep magenta for Lyft
 const platformLogos = {
   Deliveroo:"",       
   JustEat:"",          
-  Lyft:"",             
+  IRIS:"",             
   UberEats: '',         
 };
 

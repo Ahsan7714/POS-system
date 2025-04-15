@@ -7,6 +7,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { AiOutlineLogout, AiOutlineUser } from "react-icons/ai";
+import { FaUserCircle } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -15,14 +16,20 @@ import axios from "axios";
 import { server } from "../../../server";
 import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import {users} from "../../../data/user"
 
 const AdminPanel = () => {
-  const { users } = useSelector((state) => state.user);
+  // const { users } = useSelector((state) => state.user);
   const [open, setOpen] = useState(false);
   const [id, setId] = useState("");
+  const [filter,setFilter] =useState("All")
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate()
+
+  const filterUser = 
+    filter === "All" ? users : users.filter((user)=> user.status === filter);
+  
 
   useEffect(() => {
     dispatch(allUser());
@@ -52,7 +59,7 @@ const AdminPanel = () => {
   return (
     <div className="flex min-h-screen font-outfit bg-gray-100">
       <div className="w-64 bg-gradient-to-b from-green-600 to-green-800 text-white flex flex-col py-8 px-6 shadow-lg rounded-r-xl">
-  <h2 className="text-3xl font-bold mb-10 tracking-wide text-center">Admin</h2>
+  <h2 className="text-3xl font-bold mb-10 tracking-wide text-center">IRIS POS</h2>
   <nav className="space-y-4">
     <Link
       to="/admin"
@@ -77,16 +84,54 @@ const AdminPanel = () => {
 </div>
 
 
-      <div className="pt-10 w-full px-10">
-        <h1 className="text-3xl font-semibold text-gray-800 mb-6">All User</h1>
+
+      <div className="pt-4 w-full px-10">
+        <div className=" bg-green-700 text-white p-4 rounded-lg flex justify-end items-center gap-2 mb-3 cursor-default">
+          <h1 className="text-2xl font-semibold">Admin</h1>
+          <FaUserCircle size={28}/> 
+        </div>
+        <div className="flex gap-8 mt-5 mb-5">
+        <button
+            onClick={() => setFilter("All")}
+            className={`bg-white flex text-[19px] px-10 py-2.5 shadow-sm font-semibold ${
+              filter === "All"
+                ? "text-green-700 border-b-4 border-green-700 rounded-md"
+                : "hover:text-green-700 hover:bg-gray-50"
+            }`}
+          >
+            All
+          </button>
+          <button
+            onClick={() => setFilter("Active")}
+            className={`bg-white flex text-[19px] px-10 py-2.5 shadow-sm font-semibold ${
+              filter === "Active"
+                 ? "text-green-700 border-b-4 border-green-700 rounded-md"
+                : "hover:text-green-700 hover:bg-gray-50"
+            }`}
+          >
+            Active
+          </button>
+          <button
+            onClick={() => setFilter("Deactive")}
+            className={`bg-white flex text-[19px] px-10 py-2.5 shadow-sm font-semibold ${
+              filter === "Deactive"
+                 ? "text-green-700 border-b-4 border-green-700 rounded-md"
+                : "hover:text-green-700 hover:bg-gray-50"
+            }`}
+          >
+            Deactive
+          </button>
+          
+        </div>
         <Paper sx={{ width: "100%", overflow: "hidden" }}>
           <TableContainer sx={{ maxHeight: 440 }}>
             <Table stickyHeader aria-label="sticky table">
-              <TableHead>
+              <TableHead
+              >
                 <TableRow>
                   <TableCell
                     sx={{
-                      bgcolor: "#22c55e",
+                      bgcolor: "#15803d",//#22c55e 
                       fontWeight: "bold",
                       fontSize: "19px",
                       color: "white",
@@ -96,7 +141,7 @@ const AdminPanel = () => {
                   </TableCell>
                   <TableCell
                     sx={{
-                      bgcolor: "#22c55e",
+                      bgcolor: "#15803d",
                       fontWeight: "bold",
                       fontSize: "19px",
                       color: "white",
@@ -106,7 +151,7 @@ const AdminPanel = () => {
                   </TableCell>
                   <TableCell
                     sx={{
-                      bgcolor: "#22c55e",
+                      bgcolor: "#15803d",
                       fontWeight: "bold",
                       fontSize: "19px",
                       color: "white",
@@ -116,7 +161,7 @@ const AdminPanel = () => {
                   </TableCell>
                   <TableCell
                     sx={{
-                      bgcolor: "#22c55e",
+                      bgcolor: "#15803d",
                       fontWeight: "bold",
                       fontSize: "19px",
                       color: "white",
@@ -126,7 +171,17 @@ const AdminPanel = () => {
                   </TableCell>
                   <TableCell
                     sx={{
-                      bgcolor: "#22c55e",
+                      bgcolor: "#15803d",
+                      fontWeight: "bold",
+                      fontSize: "19px",
+                      color: "white",
+                    }}
+                  >
+                    Pkg Exp Date
+                  </TableCell>
+                  <TableCell
+                    sx={{
+                      bgcolor: "#15803d",
                       fontWeight: "bold",
                       fontSize: "19px",
                       color: "white",
@@ -137,19 +192,22 @@ const AdminPanel = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {users.map((user, index) => (
+                {filterUser.map((user, index) => (
                   <TableRow key={index}>
                     <TableCell className="flex text-[15px]">
                       {index + 1}
                     </TableCell>
                     <TableCell className="flex text-[15px]">
-                      {user.name}
+                      {user.ownerName}
                     </TableCell>
                     <TableCell className="flex text-[15px]">
                       {user.restaurantName}
                     </TableCell>
                     <TableCell className="flex text-[15px]">
                       {user.email}
+                    </TableCell>
+                    <TableCell className="flex text-[15px]">
+                      {user.pkgExpDate}
                     </TableCell>
                     <TableCell>
                       <button
@@ -159,7 +217,8 @@ const AdminPanel = () => {
                           setId(user._id);
                         }}
                       >
-                        <MdDeleteOutline size={32} />
+                        {/* <MdDeleteOutline size={32} /> */}
+                        {user.status}
                       </button>
                     </TableCell>
                   </TableRow>

@@ -30,18 +30,15 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen  flex flex-col justify-center py-5 sm:px-6 lg:px-8">
-      <div className="mt-8 sm:mx-auto ">
-        <div className="bg-white py-8 px-4 shadow-lg  sm:px-10">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-100 to-green-200 px-4">
+      <div className="w-full max-w-2xl bg-white py-10 px-8 shadow-2xl rounded-2xl">
           <div className=" mb-3 flex justify-center items-center text-green-500">
             <IoRestaurantOutline size={60} />
           </div>
-          <h1 className=" text-green-500 font-bold text-2xl">
-            Welcome to Restaurant ISRIS
-          </h1>
-          <h2 className="mb-4 text-black font-normal text-center">
-            Sign in to your account
-          </h2>
+          <h1 className="text-green-600 font-bold text-3xl text-center mb-2">
+          Welcome to Restaurant IRIS
+        </h1>
+        <h2 className="mb-6 text-gray-700 text-center text-lg">Sign in to your account</h2>
           <form className="space-y-3" onSubmit={handleSubmit}>
             <div className="mt-1 relative flex">
               <input
@@ -91,16 +88,15 @@ const Login = () => {
                 Sign In
               </button>
             </div>
-            <div className={`flex items-center w-full`}>
-              <h4>Don't have an account?</h4>
-              <Link to="/" className="text-green-500 pl-2 font-medium">
-                Sign Up
-              </Link>
-            </div>
+            <div className="text-center mt-6">
+            <span className="text-sm text-gray-600">Don't have an account?</span>
+            <Link to="/" className="text-green-600 font-medium ml-1">
+            Sign Up
+            </Link>
+          </div>
           </form>
         </div>
       </div>
-    </div>
   );
 };
 
