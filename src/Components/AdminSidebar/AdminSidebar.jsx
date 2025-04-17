@@ -31,7 +31,7 @@ function AdminSidebar() {
     <div className="fixed left-0 top-0 bg-white h-full overflow-y-auto w-[22%] content-scrollbar font-outfit">
       <div className="flex items-center justify-center">
         <h1 className="text-3xl font-bold text-gray-800 p-6 mt-3">
-          Restaurant IRIS
+        IRIS POS
         </h1>
       </div>
       <div className="flex flex-col px-12 py-10 gap-10">

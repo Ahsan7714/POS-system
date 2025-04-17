@@ -182,7 +182,7 @@ const Profile = () => {
             {/* Title */}
             <div className="flex flex-col items-center text-center">
               <h1 className="text-xl font-extrabold mb-2 text-green-500">
-                Welcome to Restaurant ISRIS
+                Welcome to IRIS POS
               </h1>
               <h2 className="text-md font-medium mb-3 text-black">
                 Log in to {popup.charAt(0).toUpperCase() + popup.slice(1)}

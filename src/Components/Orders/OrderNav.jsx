@@ -16,8 +16,8 @@ function OrderNav({ setOrderStatus }) {
           onClick={() => handleTabClick("All")}
           className={`${
             activeTab === "All"
-              ? "bg-white border-b-4 border-red-500 text-red-500"
-              : "bg-gray-50 hover:bg-gray-200 hover:text-red-500"
+               ? "text-green-500 border-b-4 border-green-500 rounded-md"
+                : "hover:text-green-500 hover:bg-gray-50"
           } flex gap-2 items-center text-[18px] h-12 px-6 rounded-lg shadow-sm transition-all duration-300`}
         >
           All Orders
@@ -28,8 +28,8 @@ function OrderNav({ setOrderStatus }) {
           onClick={() => handleTabClick("In Progress")}
           className={`${
             activeTab === "In Progress"
-              ? "bg-white border-b-4 border-red-500 text-red-500"
-              : "bg-gray-50 hover:bg-gray-200 hover:text-red-500"
+               ? "text-green-500 border-b-4 border-green-500 rounded-md"
+                : "hover:text-green-500 hover:bg-gray-50"
           } flex gap-2 items-center text-[18px] h-12 px-6 rounded-lg shadow-sm transition-all duration-300`}
         >
           In Progress
@@ -40,8 +40,8 @@ function OrderNav({ setOrderStatus }) {
           onClick={() => handleTabClick("Confirmed")}
           className={`${
             activeTab === "Confirmed"
-              ? "bg-white border-b-4 border-red-500 text-red-500"
-              : "bg-gray-50 hover:bg-gray-200 hover:text-red-500"
+               ? "text-green-500 border-b-4 border-green-500 rounded-md"
+                : "hover:text-green-500 hover:bg-gray-50"
           } flex gap-2 items-center text-[18px] h-12 px-6 rounded-lg shadow-sm transition-all duration-300`}
         >
           Approved/Confirmed
@@ -52,8 +52,8 @@ function OrderNav({ setOrderStatus }) {
           onClick={() => handleTabClick("Cancelled")}
           className={`${
             activeTab === "Cancelled"
-              ? "bg-white border-b-4 border-red-500 text-red-500"
-              : "bg-gray-50 hover:bg-gray-200 hover:text-red-500"
+               ? "text-green-500 border-b-4 border-green-500 rounded-md"
+                : "hover:text-green-500 hover:bg-gray-50"
           } flex gap-2 items-center text-[18px] h-12 px-6 rounded-lg shadow-sm transition-all duration-300`}
         >
           Cancelled
@@ -64,8 +64,8 @@ function OrderNav({ setOrderStatus }) {
           onClick={() => handleTabClick("Completed")}
           className={`${
             activeTab === "Completed"
-              ? "bg-white border-b-4 border-red-500 text-red-500"
-              : "bg-gray-50 hover:bg-gray-200 hover:text-red-500"
+               ? "text-green-500 border-b-4 border-green-500 rounded-md"
+                : "hover:text-green-500 hover:bg-gray-50"
           } flex gap-2 items-center text-[18px] h-12 px-6 rounded-lg shadow-sm transition-all duration-300`}
         >
           Completed

@@ -7,31 +7,41 @@ import { PlatformOrders } from '../../../Components/Mainpage/PlatformOrders';
 import { DateRangePicker } from '../../../Components/Mainpage/DateRangePicker';
 import { PlatformSection } from '../../../Components/Mainpage/PlatformSection';
 import AdminSidebar from "../../../Components/AdminSidebar/AdminSidebar"
+import { useSelector } from 'react-redux';
 
 // Dummy data to simulate filtered data by date range
-const dummyPlatformData = [
-  {
-    date: '2024-03-01',
-    Deliveroo: { totalOrders: 40, revenue: 7000, avgDeliveryTime: '30 min', activeOrders: 5 },
-    JustEat: { totalOrders: 32, revenue: 5000, avgDeliveryTime: '25 min', activeOrders: 3 },
-    UberEats: { totalOrders: 28, revenue: 4500, avgDeliveryTime: '35 min', activeOrders: 2 },
-    IRIS: { totalOrders: 18, revenue: 3200, avgDeliveryTime: '40 min', activeOrders: 1 },
-  },
-  {
-    date: '2024-06-02',
-    Deliveroo: { totalOrders: 50, revenue: 8000, avgDeliveryTime: '32 min', activeOrders: 6 },
-    JustEat: { totalOrders: 40, revenue: 6800, avgDeliveryTime: '28 min', activeOrders: 4 },
-    UberEats: { totalOrders: 30, revenue: 4800, avgDeliveryTime: '34 min', activeOrders: 3 },
-    IRIS: { totalOrders: 20, revenue: 3500, avgDeliveryTime: '38 min', activeOrders: 2 },
-  },
-  // Add more dummy data as needed for different dates
-];
+
+
 
 
 function Main() {
+  const {orders} = useSelector((state)=> state.order)
+  const totalOrder = orders.length;
+  const totalRevenue = orders.reduce((acc, order) => acc + order.totalPrice, 0);
+  const totalActiveOrders = orders.filter(order => order.status === 'Pending').length;
+  
   const [startDate, setStartDate] = useState('2024-03-01');
   const [endDate, setEndDate] = useState('2024-03-07');
   const [filteredData, setFilteredData] = useState({});
+
+  const dummyPlatformData = [
+
+    {
+      date: '2024-03-01',
+      Deliveroo: { totalOrders: 40, revenue: 7000, avgDeliveryTime: '30 min', activeOrders: 5 },
+      JustEat: { totalOrders: 32, revenue: 5000, avgDeliveryTime: '25 min', activeOrders: 3 },
+      UberEats: { totalOrders: 28, revenue: 4500, avgDeliveryTime: '35 min', activeOrders: 2 },
+      IRIS: { totalOrders: totalOrder, revenue: totalRevenue, avgDeliveryTime:"40 min", activeOrders: totalActiveOrders},
+    },
+    {
+      date: '2024-06-02',
+      Deliveroo: { totalOrders: 50, revenue: 8000, avgDeliveryTime: '32 min', activeOrders: 6 },
+      JustEat: { totalOrders: 40, revenue: 6800, avgDeliveryTime: '28 min', activeOrders: 4 },
+      UberEats: { totalOrders: 30, revenue: 4800, avgDeliveryTime: '34 min', activeOrders: 3 },
+      IRIS: { totalOrders: totalOrder, revenue: totalRevenue, avgDeliveryTime:" 40 min", activeOrders: totalActiveOrders },
+    },
+    // Add more dummy data as needed for different dates
+  ];
 
   useEffect(() => {
     // Filter the dummy data based on the selected date range

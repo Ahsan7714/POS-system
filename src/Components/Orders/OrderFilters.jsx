@@ -7,7 +7,7 @@ function OrderFilters({ onFilterChange }) {
   const [endDate, setEndDate] = useState("");
   const [orderId, setOrderId] = useState("");
 
-  const platforms = ["All Platform", "Deliveroo", "JustEat", "UberEats", "Lyft", "BiteHub"];
+  const platforms = ["All Platform", "Deliveroo", "JustEat", "UberEats", "IRIS POS"];
 
   useEffect(() => {
     onFilterChange(selectedPlatform, startDate, endDate, orderId);
@@ -18,7 +18,7 @@ function OrderFilters({ onFilterChange }) {
       {/* Platform Dropdown */}
       <div className="flex items-center space-x-2">
         <select
-          className="p-2 border border-gray-300 rounded"
+          className="p-2 border border-gray-300 rounded outline-none focus:border-green-600"
           value={selectedPlatform}
           onChange={(e) => setSelectedPlatform(e.target.value)}
         >

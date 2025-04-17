@@ -19,7 +19,9 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const AdminPanel = () => {
   const { users } = useSelector((state) => state.user);
-  const [filter,setFilter] =useState("All")
+  const [filter,setFilter] =useState("All");
+  const [id,setId] =useState("");
+  const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate()
@@ -46,6 +48,7 @@ const AdminPanel = () => {
       .put(`${server}/user/updateStatus/${id}`,{},{withCredentials:true})
       .then((res) => {
         toast.success(res.data.message);
+        setOpen(false);
         dispatch(allUser());
       })
       .catch((error) => {
@@ -173,7 +176,7 @@ const AdminPanel = () => {
                       color: "white",
                     }}
                   >
-                    Pkg Exp Date
+                    Expiry Date
                   </TableCell>
                   <TableCell
                     sx={{
@@ -209,7 +212,9 @@ const AdminPanel = () => {
                       <button
                        className={`font-semibold text-[15px] ${user.status === "Active" ? "text-green-600 hover:text-green-500" : "text-red-600 hover:text-red-500"}`}
                         onClick={() => {
-                          handleUpdate(user._id);
+                          setId(user._id);
+                          setOpen(true);
+                          
                         }}
                       >
                         {user.status}
@@ -222,12 +227,12 @@ const AdminPanel = () => {
           </TableContainer>
         </Paper>
       </div>
-      {/* {open && (
+      {open && (
         <div className="fixed inset-0 z-[999] bg-black bg-opacity-50 flex items-center justify-center">
           <div className="bg-white rounded-lg shadow-xl w-[90%] md:w-[40%] p-5 relative">
             
             <h3 className="text-center text-[22px] font-semibold text-gray-800 py-4">
-              Are you sure you want to delete this user?
+            Are you sure you want to change this user's status?
             </h3>
             <div className="flex items-center justify-center gap-4">
               <button
@@ -238,14 +243,14 @@ const AdminPanel = () => {
               </button>
               <button
                 className="bg-red-600 text-white px-6 py-2 rounded-lg"
-                onClick={() => setOpen(false) || handleDelete(id)}
+                onClick={() => setOpen(false) || handleUpdate(id)}
               >
                 Confirm
               </button>
             </div>
           </div>
         </div>
-      )} */}
+      )}
     </div>
   );
 };
