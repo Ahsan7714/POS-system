@@ -15,7 +15,6 @@ import toast from "react-hot-toast";
 
 const Kitchen = () => {
   const { orders } = useSelector((state) => state.order);
-  const { user } = useSelector((state) => state.user);
   const [filter, setFilter] = useState("All");
   const [type, setType] = useState("");
 
@@ -202,7 +201,7 @@ const Kitchen = () => {
                       <TableCell>
                         <div className="flex text-[15px]">
                           {" "}
-                          {user.restaurantName}
+                          {order.platforms}
                         </div>
                       </TableCell>
                       <TableCell>
