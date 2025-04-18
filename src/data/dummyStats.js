@@ -36,6 +36,15 @@ const dummyStats = [
     avgOrderValue: 160,
     cancelledOrders: 4,
   },
+  {
+    platform: "IRIS POS",
+    startDate: "2024-08-01",
+    endDate: "2024-08-30",
+    totalSales: 10000,
+    totalOrders: 60,
+    avgOrderValue: 160,
+    cancelledOrders: 4,
+  },
   // {
   //   platform: "Lyft",
   //   startDate: "2024-07-01",

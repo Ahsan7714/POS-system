@@ -6,10 +6,11 @@ import { Minus, Plus } from "lucide-react";
 import axios from "axios";
 import { server } from "../../../server";
 import toast from "react-hot-toast";
+import Loader from "../../../Components/Spinner/Loader";
 
 function Category() {
   const dispatch = useDispatch();
-  const { menuItems } = useSelector((state) => state.menu);
+  const { menuItems,loading } = useSelector((state) => state.menu);
 
   const [selectedCat, setSelectedCat] = useState("all");
   const [selectedItems, setSelectedItems] = useState({});
@@ -86,26 +87,27 @@ const handleQuantityChange = (item, delta) => {
           <div className=""></div>
         </div>
 
+        {loading ? <Loader/> : 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredItems.map((item) => (
-            <div key={item._id} className="bg-white rounded-2xl shadow-md border p-4">
-              <img src={item.image} alt={item.name} className="w-full h-48 object-cover" />
-              <div className="flex justify-between items-center mt-2">
-                <h2 className="text-lg font-semibold">{item.name}</h2>
-                <span className="text-green-600 font-semibold">£{item.price}</span>
-              </div>
-              <div className="flex justify-center items-center gap-2 pt-2">
-                <button onClick={() => handleQuantityChange(item, -1)} className="bg-red-500 text-white px-2 py-1 rounded">
-                  <Minus size={16} />
-                </button>
-                <span>{selectedItems[item._id]?.quantity || 0}</span>
-                <button onClick={() => handleQuantityChange(item, 1)} className="bg-green-500 text-white px-2 py-1 rounded">
-                  <Plus size={16} />
-                </button>
-              </div>
+        {filteredItems.map((item) => (
+          <div key={item._id} className="bg-white rounded-2xl shadow-md border p-4">
+            <img src={item.image} alt={item.name} className="w-full h-48 object-cover" />
+            <div className="flex justify-between items-center mt-2">
+              <h2 className="text-lg font-semibold">{item.name}</h2>
+              <span className="text-green-600 font-semibold">£{item.price}</span>
             </div>
-          ))}
-        </div>
+            <div className="flex justify-center items-center gap-2 pt-2">
+              <button onClick={() => handleQuantityChange(item, -1)} className="bg-red-500 text-white px-2 py-1 rounded">
+                <Minus size={16} />
+              </button>
+              <span>{selectedItems[item._id]?.quantity || 0}</span>
+              <button onClick={() => handleQuantityChange(item, 1)} className="bg-green-500 text-white px-2 py-1 rounded">
+                <Plus size={16} />
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>}
 
         <div className="mt-10 flex gap-4 justify-center">
           {["dine-in", "takeaway", "delivery"].map((type) => (

@@ -10,7 +10,7 @@ function OrderNav({ setOrderStatus }) {
 
   return (
     <div className="flex font-outfit bg-gray-50 rounded-lg">
-      <div className="flex w-[93%] justify-between mx-auto mt-5">
+      <div className="flex w-[100%] mx-auto mt-5 gap-14">
         {/* All Orders Link */}
         <button
           onClick={() => handleTabClick("All")}
@@ -25,9 +25,9 @@ function OrderNav({ setOrderStatus }) {
 
         {/* New Orders Link */}
         <button
-          onClick={() => handleTabClick("In Progress")}
+          onClick={() => handleTabClick("Pending")}
           className={`${
-            activeTab === "In Progress"
+            activeTab === "Pending"
                ? "text-green-500 border-b-4 border-green-500 rounded-md"
                 : "hover:text-green-500 hover:bg-gray-50"
           } flex gap-2 items-center text-[18px] h-12 px-6 rounded-lg shadow-sm transition-all duration-300`}
@@ -36,17 +36,7 @@ function OrderNav({ setOrderStatus }) {
         </button>
 
         {/* Approved/Confirmed Orders Link */}
-        <button
-          onClick={() => handleTabClick("Confirmed")}
-          className={`${
-            activeTab === "Confirmed"
-               ? "text-green-500 border-b-4 border-green-500 rounded-md"
-                : "hover:text-green-500 hover:bg-gray-50"
-          } flex gap-2 items-center text-[18px] h-12 px-6 rounded-lg shadow-sm transition-all duration-300`}
-        >
-          Approved/Confirmed
-        </button>
-
+       
         {/* Cancelled Orders Link */}
         <button
           onClick={() => handleTabClick("Cancelled")}
@@ -61,9 +51,9 @@ function OrderNav({ setOrderStatus }) {
 
         {/* Completed Orders Link */}
         <button
-          onClick={() => handleTabClick("Completed")}
+          onClick={() => handleTabClick("Ready")}
           className={`${
-            activeTab === "Completed"
+            activeTab === "Ready"
                ? "text-green-500 border-b-4 border-green-500 rounded-md"
                 : "hover:text-green-500 hover:bg-gray-50"
           } flex gap-2 items-center text-[18px] h-12 px-6 rounded-lg shadow-sm transition-all duration-300`}

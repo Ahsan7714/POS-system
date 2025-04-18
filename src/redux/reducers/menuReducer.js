@@ -2,6 +2,7 @@ import { createReducer } from "@reduxjs/toolkit";
 
 const initialState = {
     menuItems: [],
+    loading:false,
 };
 
 export const menuReducer = createReducer(initialState, (builder) => {

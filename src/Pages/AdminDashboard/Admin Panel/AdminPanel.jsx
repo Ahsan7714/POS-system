@@ -15,10 +15,11 @@ import axios from "axios";
 import { server } from "../../../server";
 import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import Loader from "../../../Components/Spinner/Loader";
 // import {users} from "../../../data/user"
 
 const AdminPanel = () => {
-  const { users } = useSelector((state) => state.user);
+  const { users,loading } = useSelector((state) => state.user);
   const [filter,setFilter] =useState("All");
   const [id,setId] =useState("");
   const [open, setOpen] = useState(false);
@@ -191,37 +192,45 @@ const AdminPanel = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {filterUser.map((user, index) => (
-                  <TableRow key={index}>
-                    <TableCell className="flex text-[15px]">
-                      {index + 1}
-                    </TableCell>
-                    <TableCell className="flex text-[15px]">
-                      {user.name}
-                    </TableCell>
-                    <TableCell className="flex text-[15px]">
-                      {user.restaurantName}
-                    </TableCell>
-                    <TableCell className="flex text-[15px]">
-                      {user.email}
-                    </TableCell>
-                    <TableCell className="flex text-[15px]">
-                    {user.pkgExpiry ? new Date(user.pkgExpiry).toISOString().split("T")[0] : "N/A"}
-                    </TableCell>
-                    <TableCell>
-                      <button
-                       className={`font-semibold text-[15px] ${user.status === "Active" ? "text-green-600 hover:text-green-500" : "text-red-600 hover:text-red-500"}`}
-                        onClick={() => {
-                          setId(user._id);
-                          setOpen(true);
-                          
-                        }}
-                      >
-                        {user.status}
-                      </button>
-                    </TableCell>
-                  </TableRow>
-                ))}
+              {loading ? (
+  <Loader />
+) : filterUser.length > 0 ? (
+  filterUser.map((user, index) => (
+    <TableRow key={index}>
+      <TableCell className="flex text-[15px]">{index + 1}</TableCell>
+      <TableCell className="flex text-[15px]">{user.name}</TableCell>
+      <TableCell className="flex text-[15px]">{user.restaurantName}</TableCell>
+      <TableCell className="flex text-[15px]">{user.email}</TableCell>
+      <TableCell className="flex text-[15px]">
+        {user.pkgExpiry
+          ? new Date(user.pkgExpiry).toISOString().split("T")[0]
+          : "N/A"}
+      </TableCell>
+      <TableCell>
+        <button
+          className={`font-semibold text-[15px] ${
+            user.status === "Active"
+              ? "text-green-600 hover:text-green-500"
+              : "text-red-600 hover:text-red-500"
+          }`}
+          onClick={() => {
+            setId(user._id);
+            setOpen(true);
+          }}
+        >
+          {user.status}
+        </button>
+      </TableCell>
+    </TableRow>
+  ))
+) : (
+  <TableRow>
+    <TableCell colSpan={6} align="center">
+      No Data Found
+    </TableCell>
+  </TableRow>
+)}
+
               </TableBody>
             </Table>
           </TableContainer>

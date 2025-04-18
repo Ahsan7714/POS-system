@@ -6,19 +6,23 @@ import { MdEmail } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import { server } from "../../../server";
 import toast from "react-hot-toast";
+import Loader from "../../../Components/Spinner/Loader";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [visible, setVisible] = useState(false);
+  const [loading,setLoading] =useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true)
     axios.post(`${server}/user/login`,{email,password},{withCredentials:true}).then((res)=>{
       toast.success(res.data.message),
       setEmail(""),
       setPassword("")
+      setLoading(false);
       if(res.data.user.role === "Admin"){
         navigate("/admin")
       }else{
@@ -26,8 +30,11 @@ const Login = () => {
       }
     }).catch((error)=>{
       toast.error(error.response.data.message)
+      setLoading(false)
     })
   };
+
+  {loading && <Loader/>}
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-100 to-green-200 px-4">
@@ -81,12 +88,16 @@ const Login = () => {
             </div>
 
             <div>
-              <button
-                type="submit"
-                className="group relative w-full h-[33px] text-center  border border-transparent text-sm font-medium rounded-full text-white bg-green-500 hover:bg-green-700"
-              >
-                Sign In
-              </button>
+            <button
+  type="submit"
+  disabled={loading}
+  className={`group relative w-full h-[33px] text-center border border-transparent text-sm font-medium rounded-full text-white ${
+    loading ? 'bg-green-300 cursor-not-allowed' : 'bg-green-500 hover:bg-green-700'
+  }`}
+>
+  {loading ? "Signing in..." : "Sign In"}
+</button>
+
             </div>
             <div className="text-center mt-6">
             <span className="text-sm text-gray-600">Don't have an account?</span>

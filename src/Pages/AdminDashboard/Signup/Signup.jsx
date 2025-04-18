@@ -11,6 +11,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FaLocationDot } from "react-icons/fa6";
 import { FaPhoneAlt } from "react-icons/fa";
 import { FaCreditCard, FaCalendarAlt, FaLock, FaMoneyBillWave } from "react-icons/fa";
+import Loader from "../../../Components/Spinner/Loader";
 
 const variants = {
   initial: { opacity: 0, x: 100 },
@@ -31,6 +32,7 @@ const Signup = () => {
   const [visible, setVisible] = useState(false);
   const [vis,setVis] =useState(false);
   const [subscriptionType, setSubscriptionType] = useState("monthly");
+  const [loading,setLoading] =useState(false);
 
   const navigate = useNavigate();
 
@@ -59,6 +61,7 @@ const Signup = () => {
   const prevStep = () => setStep((prev) => prev - 1);
 
   const steps = [1, 2, 3];
+  {loading && <Loader/>}
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-100 to-green-200 px-4 py-10">
@@ -420,9 +423,10 @@ const Signup = () => {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         type="submit"
-        className="w-[33%] py-2 rounded-full bg-green-500 text-white font-semibold"
+        disabled={loading}
+        className={`w-[33%] py-2 rounded-full bg-green-500 text-white font-semibold  ${loading ? 'bg-green-300 cursor-not-allowed' : 'bg-green-500 hover:bg-green-700'}` }
       >
-        Sign Up
+        {loading ? "Signing up..." : "Sign up"}
       </motion.button>
     </div>
   </motion.div>

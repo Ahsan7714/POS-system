@@ -81,19 +81,20 @@ function Analytics() {
       <div className="lg:ml-[23%] lg:w-[77%] bg-gray-50 p-4">
         <div className="flex items-center justify-between bg-white p-4 rounded shadow-md w-[100%]">
           {/* Platform Dropdown */}
-          <div className="flex items-center space-x-2">
-            <select
-              className="p-3 w-18 text-xl font-semibold border border-gray-300 rounded"
-              value={selectedPlatform}
-              onChange={(e) => setSelectedPlatform(e.target.value)}
-            >
-              {dummyStats.map((stat, index) => (
-                <option key={index} value={stat.platform}>
-                  {stat.platform}
-                </option>
-              ))}
-            </select>
-          </div>
+          <div className="flex items-center space-x-2 border border-green-600">
+  <select
+    className="p-2 outline-none text-base font-semibold"
+    value={selectedPlatform}
+    onChange={(e) => setSelectedPlatform(e.target.value)}
+  >
+    {dummyStats.map((stat, index) => (
+      <option key={index} value={stat.platform}>
+        {stat.platform}
+      </option>
+    ))}
+  </select>
+</div>
+
 
           {/* Date Range Picker */}
           <div className="flex items-center space-x-4">

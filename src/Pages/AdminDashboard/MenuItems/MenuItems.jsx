@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import AdminSidebar from "../../../Components/AdminSidebar/AdminSidebar";
-import { AiOutlineDelete, AiOutlineEdit, AiOutlineSearch } from "react-icons/ai";
+import {
+  AiOutlineDelete,
+  AiOutlineEdit,
+  AiOutlineSearch,
+} from "react-icons/ai";
 import AddItems from "../../../Components/menuItem/AddItems";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -16,9 +20,10 @@ import { allMenuItems } from "../../../redux/action/menu";
 import axios from "axios";
 import { server } from "../../../server";
 import toast from "react-hot-toast";
+import Loader from "../../../Components/Spinner/Loader";
 
 const MenuItems = () => {
-  const {menuItems} = useSelector((state)=> state.menu)
+  const { menuItems, loading } = useSelector((state) => state.menu);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchData, setSearchData] = useState([]);
   const [open, setOpen] = useState(false);
@@ -27,19 +32,22 @@ const MenuItems = () => {
   const [deleteItem, setDeleteItem] = useState(null);
   const dispatch = useDispatch();
 
-  useEffect(() =>{
-    dispatch(allMenuItems())
-  },[dispatch])
+  useEffect(() => {
+    dispatch(allMenuItems());
+  }, [dispatch]);
 
-  const handleDelete = (id) =>{
-    axios.delete(`${server}/menu/deleteItem/${id}`,{withCredentials:true}).then((res)=>{
-      toast.success(res.data.message)
-      setDeleteItem(false)
-      dispatch(allMenuItems())
-    }).catch((error)=>{
-      toast.error(error.response.data.message)
-    })
-  }
+  const handleDelete = (id) => {
+    axios
+      .delete(`${server}/menu/deleteItem/${id}`, { withCredentials: true })
+      .then((res) => {
+        toast.success(res.data.message);
+        setDeleteItem(false);
+        dispatch(allMenuItems());
+      })
+      .catch((error) => {
+        toast.error(error.response.data.message);
+      });
+  };
 
   const handleSearchChange = (e) => {
     const term = e.target.value;
@@ -74,8 +82,8 @@ const MenuItems = () => {
   };
 
   const handleEditClick = (item) => {
-    setSelectedItem(item); 
-    setEditOpen(true); 
+    setSelectedItem(item);
+    setEditOpen(true);
   };
 
   return (
@@ -193,27 +201,42 @@ const MenuItems = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {filteredItems.map((item, index) => (
-                    <TableRow key={index}>
-                      <TableCell>{index + 1}</TableCell>
-                      <TableCell>{item.name}</TableCell>
-                      <TableCell>{item.category}</TableCell>
-                      <TableCell>£{item.price}</TableCell>
-                      <TableCell>
-                        <div className="flex gap-4">
-                          <button
-                            className="text-green-700"
-                            onClick={() => handleEditClick(item)} 
-                          >
-                            <AiOutlineEdit size={20} />
-                          </button>
-                          <button className="text-red-700" onClick={()=> setDeleteItem(true) || setDeleteItem(item)}>
-                            <AiOutlineDelete size={20}/>
-                          </button>
-                        </div>
+                  {loading ? (
+                    <Loader />
+                  ) : filteredItems && filteredItems.length > 0 ? (
+                    filteredItems.map((item, index) => (
+                      <TableRow key={index}>
+                        <TableCell>{index + 1}</TableCell>
+                        <TableCell>{item.name}</TableCell>
+                        <TableCell>{item.category}</TableCell>
+                        <TableCell>£{item.price}</TableCell>
+                        <TableCell>
+                          <div className="flex gap-4">
+                            <button
+                              className="text-green-700"
+                              onClick={() => handleEditClick(item)}
+                            >
+                              <AiOutlineEdit size={20} />
+                            </button>
+                            <button
+                              className="text-red-700"
+                              onClick={() =>
+                                setDeleteItem(true) || setDeleteItem(item)
+                              }
+                            >
+                              <AiOutlineDelete size={20} />
+                            </button>
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    ))
+                  ) : (
+                    <TableRow>
+                      <TableCell colSpan={6} align="center">
+                        No Data Found
                       </TableCell>
                     </TableRow>
-                  ))}
+                  )}
                 </TableBody>
               </Table>
             </TableContainer>
@@ -222,28 +245,44 @@ const MenuItems = () => {
       </div>
 
       <EditItems isOpen={editOpen} onClose={EditClose} item={selectedItem} />
-      <DeleteItem isOpen={deleteItem} onClose={()=> setDeleteItem(false)} handleDelete={handleDelete} item={deleteItem} />
+      <DeleteItem
+        isOpen={deleteItem}
+        onClose={() => setDeleteItem(false)}
+        handleDelete={handleDelete}
+        item={deleteItem}
+      />
     </div>
   );
 };
 
-
-export const DeleteItem = ({isOpen, onClose,handleDelete,item}) => {
+export const DeleteItem = ({ isOpen, onClose, handleDelete, item }) => {
   return (
     <div>
       {isOpen && (
         <div className="fixed top-0 left-0 h-screen w-screen bg-black bg-opacity-50 z-[999] flex justify-center items-center">
           <div className="bg-white p-10 rounded-md">
-            <h1 className="text-2xl font-semibold">Are you sure you want to delete this item?</h1>
+            <h1 className="text-2xl font-semibold">
+              Are you sure you want to delete this item?
+            </h1>
             <div className="flex justify-center gap-4 mt-5">
-              <button className="bg-red-500 text-white px-4 py-2 rounded-md transition hover:scale-105" onClick={onClose}>No</button>
-              <button className="bg-green-500 text-white px-4 py-2 rounded-md transition hover:scale-105" onClick={()=>handleDelete(item._id)}>Yes</button>
+              <button
+                className="bg-red-500 text-white px-4 py-2 rounded-md transition hover:scale-105"
+                onClick={onClose}
+              >
+                No
+              </button>
+              <button
+                className="bg-green-500 text-white px-4 py-2 rounded-md transition hover:scale-105"
+                onClick={() => handleDelete(item._id)}
+              >
+                Yes
+              </button>
             </div>
           </div>
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
 export default MenuItems;

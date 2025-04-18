@@ -7,17 +7,18 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import { kitchOrder } from "../../../data/kitchen";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { server } from "../../../server";
 import toast from "react-hot-toast";
+import Loader from "../../../Components/Spinner/Loader";
 
 const Kitchen = () => {
-  const { orders } = useSelector((state) => state.order);
+  const { orders, loading } = useSelector((state) => state.order);
   const [filter, setFilter] = useState("All");
   const [type, setType] = useState("");
-
+  const [id, setId] = useState("");
+  const [open, setOpen] = useState(false);
   const filteredOrders = orders.filter((order) => {
     const statusMatch = filter === "All" || order.status === filter;
     const typeMatch = type === "" || order.orderType === type;
@@ -99,9 +100,9 @@ const Kitchen = () => {
           </button>
 
           <button
-            onClick={() => setType("Delivery")}
+            onClick={() => setType("delivery")}
             className={`bg-white flex text-[19px] px-10 py-2.5 shadow-sm ${
-              type === "Delivery"
+              type === "delivery"
                 ? "text-green-500 border-b-4 border-green-500 rounded-md"
                 : "hover:text-green-500 hover:bg-gray-50"
             }`}
@@ -193,64 +194,102 @@ const Kitchen = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {filteredOrders.map((order, index) => (
-                    <TableRow key={index}>
-                      <TableCell>
-                        <div className="flex text-[15px]">{index + 1}</div>
-                      </TableCell>
-                      <TableCell>
-                        <div className="flex text-[15px]">
-                          {" "}
-                          {order.platforms}
-                        </div>
-                      </TableCell>
-                      <TableCell>
-                        {" "}
-                        <div className="flex flex-col gap-1 text-sm">
-                          {order.items.map((orderItem, idx) => (
-                            <div key={idx} className="flex justify-between">
-                              <span>
-                                {orderItem.quantity} {orderItem.name}
-                              </span>
-                            </div>
-                          ))}
-                        </div>
-                      </TableCell>
-                      <TableCell>
-                        <div className="flex text-[15px]">
-                          {order.orderType}
-                        </div>
-                      </TableCell>
-                      <TableCell>
-  <div className="flex text-[15px]">
-    {new Date(`1970-01-01T${order.customerDetails.ordertime}:00`).toLocaleTimeString([], {
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: true,
-    })}
-  </div>
-</TableCell>
+                  {loading ? (
+                    <Loader />
+                  ) : filteredOrders && filteredOrders.length > 0 ? (
+                    filteredOrders.map((order, index) => (
+                      <TableRow key={index}>
+                        <TableCell>
+                          <div className="flex text-[15px]">{index + 1}</div>
+                        </TableCell>
+                        <TableCell>
+                          <div className="flex text-[15px]">
+                            {order.platforms}
+                          </div>
+                        </TableCell>
+                        <TableCell>
+                          <div className="flex flex-col gap-1 text-sm">
+                            {order.items.map((orderItem, idx) => (
+                              <div key={idx} className="flex justify-between">
+                                <span>
+                                  {orderItem.quantity} {orderItem.name}
+                                </span>
+                              </div>
+                            ))}
+                          </div>
+                        </TableCell>
+                        <TableCell>
+                          <div className="flex text-[15px]">
+                            {order.orderType}
+                          </div>
+                        </TableCell>
+                        <TableCell>
+                          <div className="flex text-[15px]">
+                            {(() => {
+                              // if the user provided a time, turn "08:57" into a valid full ISO:
+                              const timeString = order.customerDetails.ordertime
+                                ? `1970-01-01T${order.customerDetails.ordertime}:00`
+                                : order.createdAt;
 
-                      <TableCell>
-                        <button
-                          onClick={() => statusChange(order._id)}
-                          className={`${
-                            order.status === "Pending"
-                              ? "text-red-500 text-[15px]"
-                              : "text-green-500 text-[15px]"
-                          }`}
-                        >
-                          {order.status}
-                        </button>
+                              const dateObj = new Date(timeString);
+                              return dateObj.toLocaleTimeString([], {
+                                hour: "2-digit",
+                                minute: "2-digit",
+                                hour12: true,
+                              });
+                            })()}
+                          </div>
+                        </TableCell>
+                        <TableCell>
+                          <button
+                            onClick={() => setOpen(true) || setId(order._id)}
+                            className={`${
+                              order.status === "Pending"
+                                ? "text-red-500 text-[15px]"
+                                : "text-green-500 text-[15px]"
+                            }`}
+                          >
+                            {order.status}
+                          </button>
+                        </TableCell>
+                      </TableRow>
+                    ))
+                  ) : (
+                    <TableRow>
+                      <TableCell colSpan={5} align="center">
+                        No Data Found
                       </TableCell>
                     </TableRow>
-                  ))}
+                  )}
                 </TableBody>
               </Table>
             </TableContainer>
           </Paper>
         </div>
       </div>
+      {open && (
+        <div className="fixed inset-0 z-[999] bg-black bg-opacity-50 flex items-center justify-center">
+          <div className="bg-white rounded-lg shadow-xl w-[90%] md:w-[40%] p-5 relative">
+            <h3 className="text-center text-[22px] font-semibold text-gray-800 py-4">
+              Are you sure you want to change this user's status?
+            </h3>
+            <div className="flex items-center justify-center gap-4">
+              <button
+                className="bg-gray-700 text-white px-6 py-2 rounded-lg"
+                onClick={() => setOpen(false)}
+              >
+                Cancel
+              </button>
+              <button
+                className="bg-red-600 text-white px-6 py-2 rounded-lg"
+                onClick={() => setOpen(false) || statusChange(id)}
+              >
+                Confirm
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

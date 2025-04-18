@@ -3,7 +3,8 @@ import { createReducer } from "@reduxjs/toolkit";
 const initialState = {
   isUser:false,
   user:null,
-  users:[]
+  users:[],
+  loading: false,
 };
 
 export const userReducer = createReducer(initialState,(builder)=>{

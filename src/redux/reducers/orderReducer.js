@@ -1,6 +1,7 @@
 import { createReducer } from "@reduxjs/toolkit";
 const initialState = {
     orders:[],
+    loading:false
 }
 export const orderReducer = createReducer(initialState,(builder)=>{
     builder
