@@ -37,7 +37,7 @@ const dummyStats = [
     cancelledOrders: 4,
   },
   {
-    platform: "IRIS POS",
+    platform: "IRIS",
     startDate: "2024-08-01",
     endDate: "2024-08-30",
     totalSales: 10000,
@@ -45,15 +45,7 @@ const dummyStats = [
     avgOrderValue: 160,
     cancelledOrders: 4,
   },
-  // {
-  //   platform: "Lyft",
-  //   startDate: "2024-07-01",
-  //   endDate: "2024-07-30",
-  //   totalSales: 8000,
-  //   totalOrders: 40,
-  //   avgOrderValue: 174,
-  //   cancelledOrders: 2,
-  // },
+ 
 ];
 
 export default dummyStats;

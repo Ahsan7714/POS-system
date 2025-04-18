@@ -60,14 +60,16 @@ function Orders() {
     }
     if (startDate) {
       filtered = filtered.filter(
-        (order) => new Date(order.Date) >= new Date(startDate)
+        (order) => order.createdAt && new Date(order.createdAt) >= new Date(startDate)
       );
     }
     if (endDate) {
       filtered = filtered.filter(
-        (order) => new Date(order.Date) <= new Date(endDate)
+        (order) => order.createdAt && new Date(order.createdAt) <= new Date(endDate)
       );
     }
+    
+    
     if (orderId) {
       filtered = filtered.filter((order) =>
         order._id?.toString().includes(orderId)
@@ -101,7 +103,12 @@ function Orders() {
       <AdminSidebar />
       <div className="lg:ml-[23%] lg:w-[77%] bg-gray-50 p-4">
         <OrderNav setOrderStatus={filterOrders} />
-        <OrderFilters onFilterChange={applyFilters} />
+        <OrderFilters
+  onFilterChange={(platform, startDate, endDate, orderId) =>
+    setFilters({ platform, startDate, endDate, orderId })
+  }
+/>
+
 
         <div className="p-9">
           <Paper sx={{ width: "100%", overflow: "hidden" }}>

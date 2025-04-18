@@ -1,0 +1,142 @@
+.date-range-picker {
+  position: relative;
+}
+
+.date-display {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 8px 15px;
+  cursor: pointer;
+  transition: all 0.2s;
+  user-select: none;
+  gap: 8px;
+  min-width: 220px;
+}
+
+.date-display:hover {
+  border-color: #aaa;
+}
+
+.calendar-icon {
+  color: #666;
+  margin-right: 4px;
+}
+
+.to-text {
+  margin: 0 4px;
+  color: #666;
+}
+
+.dropdown-icon {
+  margin-left: auto;
+  font-size: 10px;
+  color: #666;
+}
+
+.date-picker-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 320px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  margin-top: 5px;
+  z-index: 100;
+  padding: 15px;
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.preset-ranges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+.preset-ranges button {
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.preset-ranges button:hover {
+  background-color: #e0e0e0;
+}
+
+.custom-range {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.date-input-group {
+  width: 48%;
+}
+
+.date-input-group label {
+  display: block;
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.date-input-group input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.date-picker-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.cancel-btn, .apply-btn {
+  padding: 8px 15px;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cancel-btn {
+  background-color: transparent;
+  border: 1px solid #ddd;
+  color: #666;
+}
+
+.cancel-btn:hover {
+  background-color: #f0f0f0;
+}
+
+.apply-btn {
+  background-color: #5E35B1;
+  border: none;
+  color: white;
+}
+
+.apply-btn:hover {
+  background-color: #4527A0;
+}

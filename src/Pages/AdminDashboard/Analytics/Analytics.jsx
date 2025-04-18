@@ -72,7 +72,7 @@ function Analytics() {
     Deliveroo: Math.floor(Math.random() * 3000) + 1000,
     JustEat: Math.floor(Math.random() * 3000) + 1000,
     UberEats: Math.floor(Math.random() * 3000) + 1000,
-    // Lyft: Math.floor(Math.random() * 3000) + 1000,
+    IRIS: Math.floor(Math.random() * 3000) + 1000,
   }));
 
   return (

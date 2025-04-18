@@ -6,6 +6,7 @@ import {
   FaPizzaSlice,
   FaChartLine,
   FaCog,
+  FaAdversal,
 } from "react-icons/fa"; // Import icons
 import { FaKitchenSet } from "react-icons/fa6";
 import { IoShareSocialOutline } from "react-icons/io5";
@@ -13,6 +14,7 @@ import { AiOutlineLogout } from "react-icons/ai";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { server } from "../../server";
+import { FcAdvertising } from "react-icons/fc";
 
 function AdminSidebar() {
   const location = useLocation();
@@ -117,6 +119,18 @@ function AdminSidebar() {
         >
           <IoShareSocialOutline size={20} /> {/* Icon for Settings */}
           <p>Social App</p>
+        </Link>
+
+        <Link
+          to="/demographs"
+          className={`${
+            location.pathname === "/demographs"
+              ? "bg-green-500 text-white"
+              : "text-[#000000a5]"
+          } flex gap-2 items-center text-[20px] h-10 px-4 rounded-md`}
+        >
+          <FaAdversal size={20} /> {/* Icon for Settings */}
+          <p>DemoGraphic</p>
         </Link>
 
 

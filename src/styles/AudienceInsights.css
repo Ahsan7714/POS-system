@@ -1,0 +1,98 @@
+.audience-insights {
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.insights-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.insights-card {
+  background-color: #f9f9f9;
+  border-radius: 6px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.insights-card h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 15px 0;
+  color: #333;
+}
+
+.interest-list, .behavior-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.interest-item, .behavior-item {
+  margin-bottom: 12px;
+}
+
+.interest-info, .behavior-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.interest-name, .behavior-name {
+  font-size: 14px;
+  color: #333;
+}
+
+.interest-percentage, .behavior-percentage {
+  font-size: 14px;
+  font-weight: 600;
+  color: #5E35B1;
+}
+
+.interest-bar, .behavior-bar {
+  height: 6px;
+  background-color: #e0e0e0;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.interest-progress, .behavior-progress {
+  height: 100%;
+  background-color: #5E35B1;
+  border-radius: 3px;
+  transition: width 0.5s ease-out;
+}
+
+.engagement-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.engagement-item {
+  padding: 12px;
+  background-color: #f0f0f0;
+  border-radius: 6px;
+}
+
+.engagement-label {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.engagement-value {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+@media (max-width: 768px) {
+  .insights-content {
+    grid-template-columns: 1fr;
+  }
+}
