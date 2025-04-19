@@ -32,9 +32,11 @@ function AdminSidebar() {
   return (
     <div className="fixed left-0 top-0 bg-white h-full overflow-y-auto w-[22%] content-scrollbar font-outfit">
       <div className="flex items-center justify-center">
-        <h1 className="text-3xl font-bold text-gray-800 p-6 mt-3">
-        IRIS POS
-        </h1>
+      <h1 className="text-3xl font-serif italic font-semibold bg-gradient-to-r from-green-600 to-green-900 bg-clip-text text-transparent mt-10">
+  IRIS POS
+</h1>
+
+
       </div>
       <div className="flex flex-col px-12 py-10 gap-10">
         <Link
