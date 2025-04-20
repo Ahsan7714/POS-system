@@ -26,7 +26,7 @@ const Login = () => {
       if(res.data.user.role === "Admin"){
         navigate("/admin")
       }else{
-        navigate("/dashboard")
+        navigate("/profile")
       }
     }).catch((error)=>{
       toast.error(error.response.data.message)

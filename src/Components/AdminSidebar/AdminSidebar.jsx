@@ -39,6 +39,17 @@ function AdminSidebar() {
 
       </div>
       <div className="flex flex-col px-12 py-10 gap-10">
+      <Link
+          to="/profile"
+          className={`${
+            location.pathname === "/profile"
+              ? "bg-green-500 text-white"
+              : "text-[#000000a5]"
+          } flex gap-2 items-center text-[20px] h-10 px-4 rounded-md`}
+        >
+          <FaCog size={20} /> {/* Icon for Settings */}
+          <p>Profile</p>
+        </Link>
         <Link
           to="/dashboard"
           className={`${
@@ -50,7 +61,28 @@ function AdminSidebar() {
           <FaTachometerAlt size={20} /> {/* Icon for Dashboard */}
           <p>Dashboard</p>
         </Link>
-
+        <Link
+          to="/menu-items"
+          className={`${
+            location.pathname === "/menu-items"
+              ? "bg-green-500 text-white"
+              : "text-[#000000a5]"
+          } flex gap-2 items-center text-[20px] h-10 px-4 rounded-md`}
+        >
+          <FaPizzaSlice size={20} /> {/* Icon for Menu Items */}
+          <p>Menu Items</p>
+        </Link>
+        <Link
+          to="/create-order"
+          className={`${
+            location.pathname === "/create-order"
+              ? "bg-green-500 text-white"
+              : "text-[#000000a5]"
+          } flex gap-2 items-center text-[20px] h-10 px-4 rounded-md`}
+        >
+          <FaPlusCircle size={20} /> {/* Icon for Create Order */}
+          <p>Create Order</p>
+        </Link>
         <Link
           to="/orders"
           className={`${
@@ -63,42 +95,7 @@ function AdminSidebar() {
           <p>Orders</p>
         </Link>
 
-        <Link
-          to="/create-order"
-          className={`${
-            location.pathname === "/create-order"
-              ? "bg-green-500 text-white"
-              : "text-[#000000a5]"
-          } flex gap-2 items-center text-[20px] h-10 px-4 rounded-md`}
-        >
-          <FaPlusCircle size={20} /> {/* Icon for Create Order */}
-          <p>Create Order</p>
-        </Link>
-
-        <Link
-          to="/menu-items"
-          className={`${
-            location.pathname === "/menu-items"
-              ? "bg-green-500 text-white"
-              : "text-[#000000a5]"
-          } flex gap-2 items-center text-[20px] h-10 px-4 rounded-md`}
-        >
-          <FaPizzaSlice size={20} /> {/* Icon for Menu Items */}
-          <p>Menu Items</p>
-        </Link>
-
-        <Link
-          to="/analytics"
-          className={`${
-            location.pathname === "/analytics"
-              ? "bg-green-500 text-white"
-              : "text-[#000000a5]"
-          } flex gap-2 items-center text-[20px] h-10 px-4 rounded-md`}
-        >
-          <FaChartLine size={20} /> {/* Icon for Analytics */}
-          <p>Analytics</p>
-        </Link>
-
+        
         <Link
           to="/kitchen"
           className={`${
@@ -109,6 +106,35 @@ function AdminSidebar() {
         >
           <FaKitchenSet size={20} />
           <p>Kitchen</p>
+        </Link>
+        
+
+        <Link
+          to="/analytics"
+          className={`${
+            location.pathname === "/analytics"
+              ? "bg-green-500 text-white"
+              : "text-[#000000a5]"
+          } flex gap-2 items-center text-[20px] h-10 px-4 rounded-md`}
+        >
+          <FaChartLine size={20} /> {/* Icon for Analytics */}
+          <p>Order Analytics</p>
+        </Link>
+
+        
+
+       
+
+        <Link
+          to="/demographs"
+          className={`${
+            location.pathname === "/demographs"
+              ? "bg-green-500 text-white"
+              : "text-[#000000a5]"
+          } flex gap-2 items-center text-[20px] h-10 px-4 rounded-md`}
+        >
+          <FaAdversal size={20} /> {/* Icon for Settings */}
+          <p>Ad Analytics</p>
         </Link>
 
         <Link
@@ -123,30 +149,8 @@ function AdminSidebar() {
           <p>Social App</p>
         </Link>
 
-        <Link
-          to="/demographs"
-          className={`${
-            location.pathname === "/demographs"
-              ? "bg-green-500 text-white"
-              : "text-[#000000a5]"
-          } flex gap-2 items-center text-[20px] h-10 px-4 rounded-md`}
-        >
-          <FaAdversal size={20} /> {/* Icon for Settings */}
-          <p>DemoGraphic</p>
-        </Link>
 
-
-        <Link
-          to="/profile"
-          className={`${
-            location.pathname === "/profile"
-              ? "bg-green-500 text-white"
-              : "text-[#000000a5]"
-          } flex gap-2 items-center text-[20px] h-10 px-4 rounded-md`}
-        >
-          <FaCog size={20} /> {/* Icon for Settings */}
-          <p>Profile</p>
-        </Link>
+        
 
          <button
               onClick={logoutHandler}
