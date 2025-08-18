@@ -17,6 +17,7 @@ import { loadUser } from './redux/action/user';
 import { allOrder } from './redux/action/order.js';
 import Category from './Pages/AdminDashboard/CreateOrder/Category.jsx';
 import DemographicsPage from './Pages/AdminDashboard/Demographs/DemographicsPage.jsx';
+import LandingPage from './Pages/AdminDashboard/landing page/LandingPage.jsx';
 
 
 function App() {
@@ -35,7 +36,8 @@ function App() {
     <Route path='/kitchen' element={<Kitchen />} />
     <Route path='/profile' element={<Profile/>} />
     <Route path='/social' element={<SocialMedia/>}/>
-    <Route path ='/' element={<Signup/>}/>
+    <Route path ='/signup' element={<Signup/>}/>
+    <Route path="/" element={<LandingPage/>}/>
     <Route path='/login' element={<Login/>}/>
     <Route path='/demographs' element={<DemographicsPage/>}/>
     <Route path='/admin' element={<AdminPanel/>}/>

@@ -7,45 +7,89 @@ import { Link, useNavigate } from "react-router-dom";
 import { server } from "../../../server";
 import toast from "react-hot-toast";
 import Loader from "../../../Components/Spinner/Loader";
+import { motion } from "framer-motion";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [visible, setVisible] = useState(false);
-  const [loading,setLoading] =useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true)
-    axios.post(`${server}/user/login`,{email,password},{withCredentials:true}).then((res)=>{
-      toast.success(res.data.message),
-      setEmail(""),
-      setPassword("")
-      setLoading(false);
-      if(res.data.user.role === "Admin"){
-        navigate("/admin")
-      }else{
-        navigate("/dashboard")
-      }
-    }).catch((error)=>{
-      toast.error(error.response.data.message)
-      setLoading(false)
-    })
+    setLoading(true);
+    axios
+      .post(
+        `${server}/user/login`,
+        { email, password },
+        { withCredentials: true }
+      )
+      .then((res) => {
+        toast.success(res.data.message), setEmail(""), setPassword("");
+        setLoading(false);
+        if (res.data.user.role === "Admin") {
+          navigate("/admin");
+        } else {
+          navigate("/dashboard");
+        }
+      })
+      .catch((error) => {
+        toast.error(error.response.data.message);
+        setLoading(false);
+      });
   };
 
-  {loading && <Loader/>}
+  {
+    loading && <Loader />;
+  }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-100 to-green-200 px-4">
-      <div className="w-full max-w-2xl bg-white py-10 px-8 shadow-2xl rounded-2xl">
+    <>
+      <nav className="flex justify-between items-center px-8 py-4 shadow-md bg-white ">
+        <h1 className="text-2xl font-bold text-green-600">IRIS POS</h1>
+        <div className="space-x-4">
+          <Link to="/" className="hover:text-green-600">
+            Home
+          </Link>
+          <a href="#about" className="hover:text-green-600">
+            About Us
+          </a>
+          <a href="#contact" className="hover:text-green-600">
+            Contact
+          </a>
+          <Link to="/signup">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-green-500 text-white px-4 py-2 rounded-full hover:bg-green-700"
+            >
+              Sign Up
+            </motion.button>
+          </Link>
+
+          <Link to="/login">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-green-500 text-white px-4 py-2 rounded-full hover:bg-green-700"
+            >
+              Admin Login
+            </motion.button>
+          </Link>
+        </div>
+      </nav>
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-100 to-green-200 px-4">
+        <div className="w-full max-w-2xl bg-white py-10 px-8 shadow-2xl rounded-2xl">
           <div className=" mb-3 flex justify-center items-center text-green-500">
             <IoRestaurantOutline size={60} />
           </div>
           <h1 className="text-green-600 font-bold text-3xl text-center mb-2">
-          Welcome to IRIS POS
-        </h1>
-        <h2 className="mb-6 text-gray-700 text-center text-lg">Sign in to your account</h2>
+            Welcome to IRIS POS
+          </h1>
+          <h2 className="mb-6 text-gray-700 text-center text-lg">
+            Sign in to your account
+          </h2>
           <form className="space-y-3" onSubmit={handleSubmit}>
             <div className="mt-1 relative flex">
               <input
@@ -88,26 +132,34 @@ const Login = () => {
             </div>
 
             <div>
-            <button
-  type="submit"
-  disabled={loading}
-  className={`group relative w-full h-[33px] text-center border border-transparent text-sm font-medium rounded-full text-white ${
-    loading ? 'bg-green-300 cursor-not-allowed' : 'bg-green-500 hover:bg-green-700'
-  }`}
->
-  {loading ? "Signing in..." : "Sign In"}
-</button>
-
+              <button
+                type="submit"
+                disabled={loading}
+                className={`group relative w-full h-[33px] text-center border border-transparent text-sm font-medium rounded-full text-white ${
+                  loading
+                    ? "bg-green-300 cursor-not-allowed"
+                    : "bg-green-500 hover:bg-green-700"
+                }`}
+              >
+                {loading ? "Signing in..." : "Sign In"}
+              </button>
             </div>
             <div className="text-center mt-6">
-            <span className="text-sm text-gray-600">Don't have an account?</span>
-            <Link to="/" className="text-green-600 font-medium ml-1">
-            Sign Up
-            </Link>
-          </div>
+              <span className="text-sm text-gray-600">
+                Don't have an account?
+              </span>
+              <Link to="/" className="text-green-600 font-medium ml-1">
+                Sign Up
+              </Link>
+            </div>
           </form>
         </div>
       </div>
+
+      <footer className="text-center p-6 bg-green-600 text-white ">
+        © {new Date().getFullYear()} IRIS POS. All rights reserved.
+      </footer>
+    </>
   );
 };
 
