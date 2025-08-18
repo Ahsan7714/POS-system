@@ -20,18 +20,16 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
     axios
-      .post(
-        `${server}/user/login`,
-        { email, password },
-        { withCredentials: true }
-      )
+      .post(`${server}/user/login`, { email, password }, { withCredentials: true })
       .then((res) => {
-        toast.success(res.data.message), setEmail(""), setPassword("");
+        toast.success(res.data.message);
+        setEmail("");
+        setPassword("");
         setLoading(false);
         if (res.data.user.role === "Admin") {
           navigate("/admin");
         } else {
-          navigate("/dashboard");
+          navigate("/profile");
         }
       })
       .catch((error) => {
@@ -39,10 +37,6 @@ const Login = () => {
         setLoading(false);
       });
   };
-
-  {
-    loading && <Loader />;
-  }
 
   return (
     <>
@@ -79,9 +73,10 @@ const Login = () => {
           </Link>
         </div>
       </nav>
+
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-100 to-green-200 px-4">
         <div className="w-full max-w-2xl bg-white py-10 px-8 shadow-2xl rounded-2xl">
-          <div className=" mb-3 flex justify-center items-center text-green-500">
+          <div className="mb-3 flex justify-center items-center text-green-500">
             <IoRestaurantOutline size={60} />
           </div>
           <h1 className="text-green-600 font-bold text-3xl text-center mb-2">
